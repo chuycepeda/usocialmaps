@@ -582,7 +582,7 @@
 				<!-- Right sidebar -->
 	            <div id="right-sidebar-nav" style="display:none;">
                     <a href="#" class="right" onclick="$('#right-sidebar-nav').hide()" style="color: #9BC868!important;font-size: 25px;font-family: roboto-black!important;background-color: white;height: 25px;line-height: 2rem;"><i class="mdi-navigation-close" {% if path == uri_for('landing') %}onclick="$('#main-floating').show()"{% endif %}></i></a>
-	            	<ul id="report_list" class="collection" style="    margin-top: 30px;    margin-right: 8px;     border: none!important;">
+	            	<ul id="report_list" class="collection" style="margin-top: 30px;margin-right: 8px;margin-bottom: 70px;border: none!important;">
 	                  
 	                </ul>
 	            </div>
@@ -1609,9 +1609,7 @@
 								var new_html = current_html + html;
 								OFFSET += 25;
 							    $('#report_list').html(new_html);
-							    {% if not is_mobile %}
 								$('#right-sidebar-nav').show();
-							    {% endif %}
 							}
 					    })
 					}
