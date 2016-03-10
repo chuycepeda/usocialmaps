@@ -695,6 +695,19 @@ class MaterializeLandingTouRequestHandler(BaseHandler):
         params['captchahtml'] = captchaBase(self)
         return self.render_template('materialize/landing/tou.html', **params)
 
+class MaterializeLandingAboutRequestHandler(BaseHandler):
+    """
+        Handler for materialized terms of use
+    """
+    def get(self):
+        """ returns simple html for a get request """
+        if self.user_id:
+            params, user_info = disclaim(self)
+        else:
+            params = {} 
+        params['captchahtml'] = captchaBase(self)
+        return self.render_template('materialize/landing/about.html', **params)
+
 class MaterializeLandingPrivacyRequestHandler(BaseHandler):
     """
         Handler for materialized privacy policy
@@ -894,7 +907,7 @@ class MaterializeNewReportHandler(BaseHandler):
 
             #SELECT CARTODB_ID & ASSIGN
             cl = CartoDBAPIKey(api_key, cartodb_domain)
-            response = cl.sql('select cartodb_id from %s order by cartodb_id desc limit 1' % cartodb_table)
+            response = cl.sql("select cartodb_id from %s where uuid = '%s'" % (cartodb_table, user_report.key.id()))
             user_report.cdb_id = response['rows'][0]['cartodb_id']
 
             user_report.put()
@@ -1156,6 +1169,112 @@ class MaterializeReportsRequestHandler(BaseHandler):
             self.add_message(messages.saving_error, 'danger')
             return self.get()
 
+class MaterializeReportsEditRequestHandler(BaseHandler):
+    """
+    Handler for materialized home
+    """  
+    @user_required
+    def get(self, report_id):
+        """ Returns a simple HTML form for materialize home """
+        ####-------------------- P R E P A R A T I O N S --------------------####
+        if self.user:
+            params, user_info = disclaim(self)
+        else:
+            params = {}
+        ####------------------------------------------------------------------####
+        
+        params['report'] = models.Report.get_by_id(long(report_id))
+        
+        if params['report']:
+            if params['report'].user_id == int(self.user_id):
+                return self.render_template('materialize/users/edit_report.html', **params)
+            else:
+                self.abort(403)
+        else:
+            self.abort(404)
+
+    @user_required
+    def post(self, report_id):
+        """ Get fields from POST dict """
+                        
+        address_from = self.request.get('address_from')
+        address_from_coord = self.request.get('address_from_coord')
+        catGroup = self.request.get('catGroup')
+        subCat = self.request.get('subCat')
+        description = self.request.get('description')
+        title = self.request.get('title')
+        video_url = self.request.get('video_url')
+        kind = self.request.get('kind')
+        
+        try:
+            user_report = models.Report.get_by_id(long(report_id))
+            user_report.user_id = int(self.user_id) if int(self.user_id) is not None else -1
+            user_report.address_from_coord = ndb.GeoPt(address_from_coord)
+            user_report.address_from = address_from
+            user_report.title = title
+            user_report.kind = kind
+            user_report.video_url = video_url
+            user_report.description = description
+            user_report.likeability = catGroup
+            user_report.feeling  = subCat
+            user_report.put()
+            
+            #PUSH UPDATED STATUS TO CARTODB
+            from google.appengine.api import urlfetch
+            import urllib
+            api_key = self.app.config.get('cartodb_apikey')
+            cartodb_domain = self.app.config.get('cartodb_user')
+            cartodb_table = self.app.config.get('cartodb_reports_table')
+            if user_report.cdb_id != -1:
+                #UPDATE
+                unquoted_url = ("https://%s.cartodb.com/api/v2/sql?q=UPDATE %s SET the_geom = ST_GeomFromText('POINT(%s %s)', 4326), title = '%s', description = '%s', address = '%s', image_url = '%s', likeability = '%s', feeling = '%s', follows = '%s', uuid = '%s', created = '%s', kind = '%s', video_url = '%s' WHERE cartodb_id = %s &api_key=%s" % (cartodb_domain, cartodb_table, user_report.address_from_coord.lon, user_report.address_from_coord.lat, user_report.title,user_report.description,user_report.address_from,user_report.image_url,user_report.likeability,user_report.feeling,user_report.follows,user_report.key.id(), user_report.created.strftime("%Y-%m-%d"),user_report.kind,user_report.video_url,user_report.cdb_id,api_key)).encode('utf8')
+                url = urllib.quote(unquoted_url, safe='~@$&()*!+=:;,.?/\'')
+                try:
+                    t = urlfetch.fetch(url)
+                    logging.info("t: %s" % t.content)
+                except Exception as e:
+                    logging.info('error in cartodb status UPDATE request: %s' % e)
+                    pass
+
+            user_report.put()
+
+            if hasattr(self.request.POST['file'], 'filename'):
+                #create attachment
+                from google.appengine.api import urlfetch
+                from poster.encode import multipart_encode, MultipartParam
+                
+                urlfetch.set_default_fetch_deadline(45)
+
+                payload = {}
+                upload_url = blobstore.create_upload_url('/report/image/upload/%s' %(user_report.key.id()))
+                file_data = self.request.POST['file']
+                payload['file'] = MultipartParam('file', filename=file_data.filename,
+                                                         filetype=file_data.type,
+                                                         fileobj=file_data.file)
+                data,headers= multipart_encode(payload)
+                t = urlfetch.fetch(url=upload_url, payload="".join(data), method=urlfetch.POST, headers=headers)
+                
+                logging.info('t.content: %s' % t.content)
+                
+                if t.content == 'success':
+                    message = _(messages.report_success)
+                    self.add_message(message, 'success')
+                    return self.redirect_to('materialize-reports')
+                else:
+                    message = _(messages.attach_error)
+                    self.add_message(message, 'danger')            
+                    return self.get(report_id=report_id)                    
+            else:
+                message = _(messages.report_success)
+                self.add_message(message, 'success')
+                return self.redirect_to('materialize-reports')
+
+        except Exception as e:
+            logging.info('error in post: %s' % e)
+            message = _(messages.saving_error)
+            self.add_message(message, 'danger')
+            return self.get(report_id=report_id)
+
 class MaterializeReportCommentsAddHandler(BaseHandler):
     @user_required
     def get(self):
@@ -1183,6 +1302,23 @@ class MaterializeReportCommentsAddHandler(BaseHandler):
         self.response.headers.add_header("Access-Control-Allow-Origin", "*")
         self.response.headers['Content-Type'] = 'application/json'
         self.response.write(json.dumps(reportDict))
+
+class MaterializeReportListHandler(BaseHandler):
+    """
+    Handler for materialized home
+    """  
+    @user_required
+    def get(self):
+        """ Returns a simple HTML form for materialize home """
+        ####-------------------- P R E P A R A T I O N S --------------------####
+        if self.user:
+            params, user_info = disclaim(self)
+        else:
+            params = {}
+        ####------------------------------------------------------------------####
+        
+        return self.render_template('materialize/users/reports_list.html', **params)
+
 
 # USER
 class MaterializeSettingsProfileRequestHandler(BaseHandler):

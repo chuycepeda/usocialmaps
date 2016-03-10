@@ -144,7 +144,7 @@
 		{% block navbar %}
 			<!-- START NAVBAR -->
 			<nav style="background-color: transparent;position: fixed;border-bottom: none; z-index: 9999999;" class="z-depth-2">
-				<div class="nav-wrapper" style="background:white;opacity:0.85">
+				<div class="nav-wrapper" style="background:white;opacity:0.85;">
 				  <a href="{{uri_for("landing")}}" class="brand-logo">
 				  	<img src="{{brand_logo}}" style="height:45px; margin-top:8px; {% if is_mobile %}margin-left:4px;{% else %}margin-left:10px;{% endif %}">
 				  	<div id="main-preloader" class="preloader-wrapper small active" style="display:none;">
@@ -199,75 +199,100 @@
 				  </a>
 				  <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-more-vert grey-text"></i></a>
 				  <ul id="nav-mobile" class="right hide-on-med-and-down">
+				  	<li id="nav-fb"><a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
+				  	<li id="nav-tw"><a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
+				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
+				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Contact</a></li>
+				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Case Studies</a></li>
 				    {% if not user_id %}
-				    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Login</a></li>
-				    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
+				    	{% if path != uri_for('landing') %}
+					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+					    {% endif %}
+					    {% if path != uri_for('materialize-report-new') and path != uri_for('login')%}
+					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+					    {% endif %}
+
+					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Login</a></li>
+					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
+					    
 				    {% else %}
-				    {% if path != uri_for('landing') %}
-				    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
-				    {% endif %}
-					{% if path != uri_for('materialize-report-new') %}
-				    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
-				    {% endif %}
-				    <ul id="profile-dropdown" class="dropdown-content" style="margin-top:10px; border-radius:4px; padding:10px">
-		                  <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
-	                        </li>
-	                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-reports") }}">My reports</a>
-	                        </li>
-	                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("logout") }}">Logout</a>
-	                        </li>
-		            </ul>
-				    <li class="nav-user" style="margin-right: -32px; height: 65px;">
-                        	{% if has_picture %}
-								<a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn right" href="#" data-activates="profile-dropdown" style="    height: 45px; margin-top: 8px;    line-height: 1.5rem;    position: relative;     font-family: roboto-medium;">
-										<div style="position: absolute;left: 0px;"><img src="/media/serve/profile/{{user_id}}/" alt="" class="circle responsive-img valign profile-image" style=" height: 30px; margin-top:6px;border: 1px solid white; height:35px"></div>
-										<span style="padding: 15px;height: 46px;text-transform: none;" class="valign-wrapper">{{name}} <i class="material-icons right" style="margin-left: 5px; font-size: 14px;">arrow_drop_down</i></span>
-		                        </a>
-							{% else %}
-								<a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn right" href="#" data-activates="profile-dropdown" style="    height: 45px; margin-top: 8px;    line-height: 1.5rem;    position: relative;     font-family: roboto-medium;">
-										<div style="position: absolute;left: 0px;">
-											<span class="circle sm-blue white-text" style="width: 35px;   height: 35px; display: inline-block;   text-align: center;   font-size: 1.5rem;   color: #fff;   font-weight: 300;margin-top: 5px;line-height: 2.2rem;">{{ name_i }}</span>
-										</div>
-										<span style="padding: 15px;height: 46px;text-transform: none;" class="valign-wrapper">{{name}} <i class="material-icons right" style="margin-left: 5px; font-size: 14px;">arrow_drop_down</i></span>
-		                        </a>
-							{% endif %}
-                     </li>	
+				    	{% if path != uri_for('landing') %}
+					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+					    {% endif %}
+					    {% if path != uri_for('materialize-report-new') %}
+					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+					    {% endif %}
+					    <ul id="profile-dropdown" class="dropdown-content" style="margin-top:10px; border-radius:4px; padding:10px">
+			                  <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
+		                        </li>
+		                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-reports") }}">My reports</a>
+		                        </li>
+		                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("logout") }}">Logout</a>
+		                        </li>
+			            </ul>
+					    <li class="nav-user" style="margin-right: -32px; height: 65px;">
+	                        	{% if has_picture %}
+									<a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn right" href="#" data-activates="profile-dropdown" style="    height: 45px; margin-top: 8px;    line-height: 1.5rem;    position: relative;     font-family: roboto-medium;">
+											<div style="position: absolute;left: 0px;"><img src="/media/serve/profile/{{user_id}}/" alt="" class="circle responsive-img valign profile-image" style=" height: 30px; margin-top:6px;border: 1px solid white; height:35px"></div>
+											<span style="padding: 15px;height: 46px;text-transform: none;" class="valign-wrapper">{{name}} <i class="material-icons right" style="margin-left: 5px; font-size: 14px;">arrow_drop_down</i></span>
+			                        </a>
+								{% else %}
+									<a class="btn-flat dropdown-button waves-effect waves-light grey-text profile-btn right" href="#" data-activates="profile-dropdown" style="    height: 45px; margin-top: 8px;    line-height: 1.5rem;    position: relative;     font-family: roboto-medium;">
+											<div style="position: absolute;left: 0px;">
+												<span class="circle sm-blue white-text" style="width: 35px;   height: 35px; display: inline-block;   text-align: center;   font-size: 1.5rem;   color: #fff;   font-weight: 300;margin-top: 5px;line-height: 2.2rem;">{{ name_i }}</span>
+											</div>
+											<span style="padding: 15px;height: 46px;text-transform: none;" class="valign-wrapper">{{name}} <i class="material-icons right" style="margin-left: 5px; font-size: 14px;">arrow_drop_down</i></span>
+			                        </a>
+								{% endif %}
+	                     </li>	
 				    {% endif %}
 				  </ul>
 				  <ul class="side-nav" id="mobile-demo">
+				    <li id="nav-fb"><a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 70px;"></a></li>
+				  	<li id="nav-tw"><a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 70px;"></a></li>
+				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
+				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Contact</a></li>
+				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Case Studies</a></li>
 				    {% if not user_id %}
-				    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item">Login</a></li>
-				    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item">Sign up</a></li>
+				    	{% if path != uri_for('landing') %}
+						<li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+						{% endif %}
+						{% if path != uri_for('materialize-report-new') and path != uri_for('login')%}
+						<li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+						{% endif %}
+					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white " style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Login</a></li>
+					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white " style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
 				    {% else %}
-				    <li class="no-padding">
-                        <ul class="collapsible collapsible-accordion">
-                            <li class="bold">
-                            	<a class="collapsible-header waves-effect waves-cyan center">
-						    	{% if has_picture %}
-									<img src="/media/serve/profile/{{user_id}}/" alt="" class="circle responsive-img valign profile-image" style="margin-top:6px;border: 1px solid rgb(3, 169, 244); height:50px">
-								{% else %}
-		                        	<span class="circle sm-blue white-text" style="width: 50px;height: 50px;display: inline-block;vertical-align: middle;text-align: center;font-size: 1.5rem;color: #fff;font-weight: 300;margin-top: 0px;margin-left: 10px;line-height: 3.5rem;;">{{ name_i }}</span>
-								{% endif %}
-                            	<div class="collapsible-body">
-                                    <ul>
-									  <li><a style="font-family:roboto-medium;" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
-		                                </li>
-		                              <li><a style="font-family:roboto-medium;" href="{{ uri_for("materialize-reports") }}">My reports</a>
-		                                </li>
-		                              <li><a style="font-family:roboto-medium;" href="{{ uri_for("logout") }}">Logout</a>
-		                                </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>				    
-				    <li class="divider"></li>
-					{% if path != uri_for('landing') %}
-					<li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
-					{% endif %}
-					{% if path != uri_for('materialize-report-new') %}
-					<li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
-					{% endif %}
+					    <li class="no-padding">
+	                        <ul class="collapsible collapsible-accordion">
+	                            <li class="bold">
+	                            	<a class="collapsible-header waves-effect waves-cyan center">
+							    	{% if has_picture %}
+										<img src="/media/serve/profile/{{user_id}}/" alt="" class="circle responsive-img valign profile-image" style="margin-top:6px;border: 1px solid rgb(3, 169, 244); height:50px">
+									{% else %}
+			                        	<span class="circle sm-blue white-text" style="width: 50px;height: 50px;display: inline-block;vertical-align: middle;text-align: center;font-size: 1.5rem;color: #fff;font-weight: 300;margin-top: 0px;margin-left: 10px;line-height: 3.5rem;;">{{ name_i }}</span>
+									{% endif %}
+	                            	<div class="collapsible-body">
+	                                    <ul>
+										  <li><a style="font-family:roboto-medium;" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
+			                                </li>
+			                              <li><a style="font-family:roboto-medium;" href="{{ uri_for("materialize-reports") }}">My reports</a>
+			                                </li>
+			                              <li><a style="font-family:roboto-medium;" href="{{ uri_for("logout") }}">Logout</a>
+			                                </li>
+	                                    </ul>
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </li>
+	                     <li class="divider"></li>
+						{% if path != uri_for('landing') %}
+						<li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+						{% endif %}
+						{% if path != uri_for('materialize-report-new') %}
+						<li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+						{% endif %}				    
+					   
 				    {% endif %}
 				  </ul>
 				</div>
@@ -315,7 +340,7 @@
 	                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="kind-opinion"></i><a class="grey-text" href="#" onclick="setQ('kind','opinion'); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i>Opinion</a> 
 	                      	</div>
 	                      	<div class="col s11 offset-s1"> 
-	                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="kind-idea"></i><a class="grey-text" href="#" onclick="setQ('kind','idea'); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i>Idea</a> 
+	                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="kind-project"></i><a class="grey-text" href="#" onclick="setQ('kind','project'); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i>Project</a> 
 	                      	</div>
 	                      	<div class="col s11 offset-s1"> 
 	                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="kind-intervention"></i><a class="grey-text" href="#" onclick="setQ('kind','intervention'); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i>Intervention</a> 
@@ -556,7 +581,7 @@
 			{% if path == uri_for('landing') %}
 				<!-- Right sidebar -->
 	            <div id="right-sidebar-nav" style="display:none;">
-                    <a href="#" class="right" onclick="$('#right-sidebar-nav').hide()" style="color: #9BC868!important;font-size: 25px;font-family: roboto-black!important;background-color: white;height: 25px;line-height: 2rem;"><i class="mdi-navigation-close"></i></a>
+                    <a href="#" class="right" onclick="$('#right-sidebar-nav').hide()" style="color: #9BC868!important;font-size: 25px;font-family: roboto-black!important;background-color: white;height: 25px;line-height: 2rem;"><i class="mdi-navigation-close" {% if path == uri_for('landing') %}onclick="$('#main-floating').show()"{% endif %}></i></a>
 	            	<ul id="report_list" class="collection" style="    margin-top: 30px;    margin-right: 8px;     border: none!important;">
 	                  
 	                </ul>
@@ -566,9 +591,9 @@
 		{% endblock %}
 
 		{% block page_floatings %}
-			{% if path != uri_for('materialize-report-new') %}
+			{% if path != uri_for('materialize-report-new') and uri_for('materialize-reports') not in path %}
 			<!-- Floating Action Button -->
-            <div class="fixed-action-btn" style="bottom: 65px; right: 60px;">
+            <div class="fixed-action-btn" style="bottom: 65px; right: 60px; {% if path == uri_for('landing') %}display: none;{% endif %}" id="main-floating">
                 <a class="btn-floating btn-large sm-green">
                   <i class="large mdi-content-add"></i>
                 </a>
@@ -588,7 +613,7 @@
 			<footer class="page-footer" style="margin-top:0!important; background-color:#f1f1f1!important">
 				<div class="footer-copyright " style="text-align:right;">
 				  <div class="container">
-				  	<a class="white-text" href="{{uri_for("license")}}">MIT License - </a>© 2015 Social Maps, All rights reserved. Powered by <a class="white-text tooltipped" data-position="top" data-delay="50" data-tooltip="Try the Konami-code" href="http://usocialmaps.appspot.com" target="_blank">the amazing MBoilerplate.</a>
+				  	<a class="white-text" href="{{uri_for("license")}}">MIT License - </a>© 2015 Social Maps, All rights reserved. Powered by <a class="white-text tooltipped" data-position="top" data-delay="50" data-tooltip="Try the Konami-code" href="http://usocialmaps.appspot.com" target="_blank">the amazing MBoilerplate.</a> | <a class="white-text" href="{{uri_for('tou')}}">Terms of Use</a> | <a class="white-text" href="{{uri_for('privacy')}}"> Privacy Policy</a>
 				  </div>
 				</div>
 			</footer>
@@ -1036,6 +1061,7 @@
 						}
 						
 						tileStyle += "#" + table + "[kind='idea']{marker-file:url('" + sourceurl + "idea.png');}";
+						tileStyle += "#" + table + "[kind='project']{marker-file:url('" + sourceurl + "idea.png');}";
 						tileStyle += "#" + table + "[kind='intervention']{marker-file:url('" + sourceurl + "intervention.png');}";
 						
 						//tileStyle += closeStyle;
@@ -1061,14 +1087,14 @@
 											_kinds.push("opinion");
 										}
 										break;
-									case 'idea':
-										if ($('#kind-idea:visible').length > 0){
-											$('#kind-idea').hide();
-											i = _kinds.indexOf("idea");
+									case 'project':
+										if ($('#kind-project:visible').length > 0){
+											$('#kind-project').hide();
+											i = _kinds.indexOf("project");
 											if(i != -1) _kinds.splice(i, 1);
 										}else{
-											$('#kind-idea').show();
-											_kinds.push("idea");
+											$('#kind-project').show();
+											_kinds.push("project");
 										}
 										break;
 									case 'intervention':
@@ -1083,7 +1109,7 @@
 										break;
 									default:
 											$('#kind-opinion').hide();
-											$('#kind-idea').hide();
+											$('#kind-project').hide();
 											$('#kind-intervention').hide();
 											_kinds = [];
 										break;
@@ -1320,16 +1346,17 @@
 						loadComments($('#report_uuid').val());
 						getgSV(latlng)
 
-						if (data.video_url.indexOf('http') != -1){
-							if (data.video_url.indexOf('embed') != -1)
-								$('#report_video').html('<iframe width="640" height="360" src="'+data.video_url+'" frameborder="0" allowfullscreen=""></iframe>');
-							else{
-								$('#report_video').html('<iframe width="640" height="360" src="https://www.youtube.com/embed/'+data.video_url.split("=")[data.video_url.split("=").length-1]+'" frameborder="0" allowfullscreen=""></iframe>');
+						if (data.video_url)
+							if (data.video_url.indexOf('http') != -1){
+								if (data.video_url.indexOf('embed') != -1)
+									$('#report_video').html('<iframe width="640" height="360" src="'+data.video_url+'" frameborder="0" allowfullscreen=""></iframe>');
+								else{
+									$('#report_video').html('<iframe width="640" height="360" src="https://www.youtube.com/embed/'+data.video_url.split("=")[data.video_url.split("=").length-1]+'" frameborder="0" allowfullscreen=""></iframe>');
+								}
+								$('#video-row').show();
+							}else{
+								$('#video-row').hide();
 							}
-							$('#video-row').show();
-						}else{
-							$('#video-row').hide();
-						}
 
 						$('#modal3').openModal();
 						if (document.getElementById('close-infowindow')) document.getElementById('close-infowindow').click();
@@ -1514,10 +1541,12 @@
 						$('#main-preloader').hide();
 					}
 
+					var OFFSET = 0;
+
 					function populateSidebar(){
-						var html = "", query = "select st_y(the_geom) as lat, st_x(the_geom) as lon, * from "+_table_name + " order by created desc limit 25 ";
+						var html = "", query = "select st_y(the_geom) as lat, st_x(the_geom) as lon, * from "+_table_name + " order by created desc offset "+OFFSET+" limit 25 ";
 						_sql.execute(query).done(function(data) {
-					        if(data.total_rows >= 1) {
+					        if(data.total_rows >= 0) {
 							    for(var i=0,j=data.total_rows;i<j;i++){
 							    	html += '<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;">';
 					                if (data.rows[i].image_url != 'None')
@@ -1561,7 +1590,25 @@
 									html+='</div>';
 									html+='</li>';
 							    }
-							    $('#report_list').html(html);
+
+							    if (data.total_rows == 0){
+							    	html += '<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;">';
+									html += '<div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span class="btn grey disabled white-text" >Loaded all</a></div>';
+									html+='</li>';
+							    }else{
+							    	html += '<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;">';
+									html += '<div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</a></div>';
+									html+='</li>';
+							    }
+
+							    
+
+								var current_html = $('#report_list').html();
+								current_html = current_html.replace('<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;"><div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</span></div></li>','');
+							    
+								var new_html = current_html + html;
+								OFFSET += 25;
+							    $('#report_list').html(new_html);
 							    {% if not is_mobile %}
 								$('#right-sidebar-nav').show();
 							    {% endif %}
@@ -1596,6 +1643,8 @@
 						if (kind == "intervention")
 							return "http://usocialmaps.appspot.com/default/materialize/images/markers/intervention.png";
 						if (kind == "idea")
+							return "http://usocialmaps.appspot.com/default/materialize/images/markers/idea.png";
+						if (kind == "project")
 							return "http://usocialmaps.appspot.com/default/materialize/images/markers/idea.png";
 
 						switch(st){

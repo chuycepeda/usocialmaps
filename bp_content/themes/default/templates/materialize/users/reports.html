@@ -68,6 +68,9 @@
 		                            <p><i style="padding:8px;" class="mdi-action-book sm-green-text"></i>Place: <span style="color:#{{color}}!important">{{title}}</span></p>
 		                            <p><i style="padding:8px;" class="mdi-action-favorite sm-green-text"></i>Likes: <span style="color:#{{color}}!important">{{follows}}</span></p>
 		                            {% if video_url %}<div class="video-container no-controls"><iframe width="640" height="360" src="{{video_url}}" frameborder="0" allowfullscreen=""></iframe></div>{% endif %}
+		                            <div class="divider" style="margin-top:8px; margin-bottom:8px"></div>
+		                            {% if source != 'follow' %}<a href="{{ uri_for('materialize-reports-edit', report_id = idx)}}" class="btn col s12">Edit Report</a>{% endif %}
+
 		                        </div>
 		                    </div>
 		                </div>

@@ -1,0 +1,228 @@
+{% extends landing_layout %}
+
+<!-- ADD PAGE HEAD ELEMENTS -->
+{% block title %}<title>{{app_name}} » Reports list</title>{% endblock %}
+   
+{% block page_css %}
+ 	<link href="/{{theme}}/materialize/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="/{{theme}}/materialize/css/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+ 	<link href="/{{theme}}/materialize/css/plugins/rrssb/rrssb.css" type="text/css" rel="stylesheet" media="screen,projection">
+ 	<link href="/{{theme}}/materialize/css/jquery.timelineMe.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css">
+ 	<style>
+		.rating:hover{
+			color:#ffc107!important;
+			transform: scale(1.75);
+			-webkit-transform: scale(1.75);
+		}
+
+		.rating{
+			font-size: 30px;
+			transform: scale(1.5);
+			-webkit-transform: scale(1.5);
+		} 
+
+		.create{
+			transition-timing-function: ease-in;
+    		transition: border 0.3s;
+    		-webkit-transition-timing-function: ease-in;
+    		-webkit-transition: border 0.3s;
+		}
+
+		.create:hover{
+			border-bottom: 6px solid {{brand_color}};
+		}
+
+		.chip {
+		    display: inline-block;
+		    height: 32px;
+		    font-size: 13px;
+		    font-weight: 500;
+		    color: rgba(0, 0, 0, 0.6);
+		    line-height: 32px;
+		    padding: 0 12px;
+		    border-radius: 16px;
+		    background-color: #e4e4e4;
+		}
+
+		.hoverable:hover{
+        	box-shadow: #A9A6A6 0px 8px 23px 6px;
+        	transition: all .3s ease-out;
+        }
+
+        .hoverable{
+        	transition: all .3s ease-out;
+		}
+
+		.image{
+			-webkit-transform: scale(0.55);
+			transform: scale(0.55);
+			display: inline-block;
+			vertical-align: top;
+			width: 60px;
+			height: 70px;
+			max-width: 60px;
+			max-height: 70px;
+			border-radius: 3px;
+			line-height: 60px;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.image:hover{
+			-webkit-transform: scale(0.65);
+			transform: scale(0.65);
+		}
+ 	</style>
+{% endblock %}
+
+{% block page_components %}
+{% endblock %}
+
+
+{% block header_content %}
+<div class="parallax-container" style="max-height:200px;overflow:hidden;margin-bottom: -80px;">
+	<div class="section no-pad-bot">
+	  <div class="container">
+	    <h2 class="header center brand-color-text" style="margin-top:85px;">Reports list</h2>        
+	  </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block body_content %}
+	<div class="section">
+		<div class="container" style="margin-top:80px">
+			<div class="row">
+		        <div class="row">
+	                <div class="col s12 m10 offset-m1 " style="margin-bottom: 40px;">
+	                   <a id="loadmore" class="waves-effect waves-light btn" style="position: fixed">Load more</a>
+	                </div>
+	                <div id="tl-meta" class="col s12 m10 offset-m1 ">
+	                   <div id="timeline-container" class="row"></div>
+	                </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}
+
+{% block page_scripts %}
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places,visualization"></script>
+	<script src="/{{theme}}/materialize/js/plugins/rrssb/rrssb.min.js"></script>
+	<script src="/{{theme}}/materialize/js/jquery.timelineMe.js"></script>
+	<script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+	<script>
+		var city_sql = new cartodb.SQL({ user: 'usocialmaps' });
+	    var city_table_name = 'public_reports';
+		
+		function getData(step,limit){
+            var q = "Select * from "+city_table_name+" order by created desc offset "+step+" limit "+ limit;
+            city_sql.execute(q).done(function(data) {
+                console.log(data)
+                var items = [];
+                for (var i = 0; i < data.total_rows;i++){
+                    var shrt = '<div class="container"><div class="card-content"><span class="title grey-text">'+data.rows[i].title+'<img src="'+getIcon(data.rows[i].likeability, data.rows[i].kind)+'" class="right" style="height:40px;"></span></div></div>';
+                    if (data.rows[i].image_url != 'None')
+					    shrt += '<div class="row center" style="cursor:pointer"><img src="'+data.rows[i].image_url+'" alt="" class="responsive-img" onclick="loadModal('+data.rows[i].cartodb_id+');"></div>';
+
+					shrt +='<div class="row center">';
+					shrt +=getFeelingHTML(data.rows[i].likeability, data.rows[i].feeling);
+					shrt +='</div>';
+
+					var full = shrt;
+					full+='<p class="grey-text">'+data.rows[i].description+'</p>';
+
+					shrt+='<div class="card-action center"><a class="grey-text maplink" href="{{uri_for('landing')}}?cdb_id='+data.rows[i].cartodb_id+'" target="_blank"><i class="mdi-maps-place"></i>View map</a></div></div>';
+					full+='<div class="card-action center"><a class="grey-text maplink" href="{{uri_for('landing')}}?cdb_id='+data.rows[i].cartodb_id+'" target="_blank"><i class="mdi-maps-place"></i>View map</a></div></div>';
+                    
+                    var d = new Date(data.rows[i].created);
+                    items.push({
+                      type: 'smallItem',
+                      label: d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()  + " " + d.getHours() + ":" + d.getMinutes(),
+                      picto: '<a style="background-color: #5CD1DC;height: 250%;width: 250%;margin-left: -50%;margin-top: -55%;" class="image"></a>',
+                      shortContent: shrt,
+                      fullContent: full,
+                      showMore: '<a class="btn-floating waves-effect waves-light blue right" style="right: 20px; "><i class="material-icons">add</i></a>',
+                      showLess: '<a class="btn-floating waves-effect waves-light blue right" style="right: 20px; "><i class="material-icons">remove</i></a>'
+                    });
+                }
+                $('#timeline-container').timelineMe({
+                  labelClass: 'labelclass',
+                  shortContentClass: 'card',
+                  fullContentClass: 'card',
+                  showMoreClass: 'row',
+                  showLessClass: 'row',
+                  items: items
+                });
+                Materialize.fadeInImage('#tl-meta');        
+		    });
+		}
+		
+		$(function() {
+            var step = 0;
+            var limit = 15;	
+            getData(step,limit);
+            
+            $('#loadmore').click(function(){
+                $('#tl-meta').empty();
+                $('#tl-meta').append('<div id="timeline-container" class="row"></div>');
+                step += 1;
+                getData(step*limit, limit);
+            });
+        
+        });
+
+        function getIcon(st, kind){
+			if (kind == "intervention")
+				return "http://usocialmaps.appspot.com/default/materialize/images/markers/intervention.png";
+			if (kind == "idea")
+				return "http://usocialmaps.appspot.com/default/materialize/images/markers/idea.png";
+			if (kind == "project")
+				return "http://usocialmaps.appspot.com/default/materialize/images/markers/idea.png";
+
+			switch(st){
+		        case 'Not at all':
+		            return 'http://usocialmaps.appspot.com/default/materialize/images/markers/_red.png';
+		        case 'A little':
+		            return 'http://usocialmaps.appspot.com/default/materialize/images/markers/_orange.png';
+		        case 'As any other':
+		            return 'http://usocialmaps.appspot.com/default/materialize/images/markers/_amber.png';
+		        case 'A lot':
+		            return 'http://usocialmaps.appspot.com/default/materialize/images/markers/_green.png';
+		        case 'I love it':
+		            return 'http://usocialmaps.appspot.com/default/materialize/images/markers/_blue.png';
+		    }
+		}
+
+		function getFeelingHTML(l, f){
+			f = f.split(' ');
+			var r='', color ='';
+			switch(l){
+		        case 'Not at all':
+		            color="#F26E62";
+		            break;
+		        case 'A little':
+		            color="#F79A50";
+		            break;
+		        case 'As any other':
+		            color="#FDC935";
+		            break;
+		        case 'A lot':
+		            color="#3CC6D7";
+		            break;
+		        case 'I love it':
+		            color="#608FC4";
+		            break;
+		    }
+
+			for(var i=0,j=f.length;i<j;i++){
+				r += '<div class="col s4" style="color:'+color+'"><div class="col s12"><i class="mdi-image-brightness-1" style="font-size:15px;"></i></div><div class="col s12">'+f[i]+'</div></div>';
+			}
+			return r;
+		}
+	</script>
+{% endblock %}

@@ -91,7 +91,7 @@ class User(User):
 class Report(ndb.Model):
     created = ndb.DateTimeProperty(auto_now_add = True)                                                                             #: Creation date on ndb
     updated = ndb.DateTimeProperty(auto_now = True)                                                                                 #: Modification date on ndb
-    kind = ndb.StringProperty(default = 'opinion')                                                                                  #: Report kind
+    kind = ndb.StringProperty(choices=['intervention','idea', 'project', 'opinion'], default = 'opinion')                           #: Report kind
     title = ndb.StringProperty()                                                                                                    #: Report title
     description = ndb.TextProperty()                                                                                                #: Report description
     address_from_coord = ndb.GeoPtProperty()                                                                                        #: lat/long address for report 

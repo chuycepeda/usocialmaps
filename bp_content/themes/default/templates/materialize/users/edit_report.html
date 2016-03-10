@@ -1,5 +1,5 @@
 {% extends landing_layout %}
-{% block title %}<title>New Report</title>{% endblock %}
+{% block title %}<title>Edit Report</title>{% endblock %}
 
 {% block page_css %}
 	<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css">
@@ -32,7 +32,7 @@
 		    	                		<div class="input-field col s11 offset-s1 m5 offset-m1">
 		                                    <!-- Dropdown Trigger -->
 		                                    <p class="grey-text">I want to share an...</p>
-		                                    <a data-hover="false" id='kindGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='kindGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">---</a>
+		                                    <a data-hover="false" id='kindGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='kindGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">{{report.kind}}</a>
 		                                    <!-- Dropdown Structure -->
 		                                    <ul id='kindGroupdd' class='dropdown-content' style="max-height: 250px; font-weight: bolder;">
 		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">opinion</a></li>
@@ -43,19 +43,19 @@
 		    	                	</div>
 	                                <div class="input-field col s11 offset-s1">
 	                                    <i class="mdi-av-subtitles prefix sm-green-text"></i>
-	                                    <input id="title" name="title" class="materialize-textarea" length="100" type="text">
+	                                    <input id="title" name="title" class="materialize-textarea" length="100" type="text" value="{{report.title}}">
 	                                    <label for="title">The place is called:</label>
 	                                </div>
 	                                <div class="input-field col s11 offset-s1">
 	                                    <i class="mdi-maps-map prefix sm-green-text"></i>
-	                                    <textarea id="description" name="description" class="materialize-textarea" length="500" style="height: 22px;" type="text" ></textarea>
+	                                    <textarea id="description" name="description" class="materialize-textarea" length="500" style="height: 22px;" type="text" >{{report.description}}</textarea>
 	                                    <label for="description">Write your opinion about this place. What do you like and do not like? How can it be improved? What's happening here? (Optional)</label>
 	                                </div>
 		    	                    <div class="row center">
 		                                <div class="input-field col s11 offset-s1 m5 offset-m1">
 		                                    <!-- Dropdown Trigger -->
 		                                    <p class="grey-text" style="margin-left:55px">I like this place...</p>
-		                                    <a data-hover="false" id='catGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='catGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">---</a>
+		                                    <a data-hover="false" id='catGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='catGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">{{report.likeability}}</a>
 		                                    <!-- Dropdown Structure -->
 		                                    <ul id='catGroupdd' class='dropdown-content' style="max-height: 250px; font-weight: bolder;">
 		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(this.innerHTML).trim(); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> Not at all</a></li>
@@ -132,11 +132,11 @@
 		    	                    </div>
 		    	                    <div class="input-field col s11 offset-s1" style="margin-top:20px;">
 					                    <i class="mdi-action-search prefix sm-green-text" onclick="geocode('from')"></i>
-					                    <input id="address_from" name="address_from" type="text" class="validate" value="{{address_from}}" placeholder="Write down the address or click on the map." onkeydown="if (event.keyCode == 13) geocode('from');">
+					                    <input id="address_from" name="address_from" type="text" class="validate" value="{{report.address_from}}" placeholder="Write down the address or click on the map." onkeydown="if (event.keyCode == 13) geocode('from');">
 					                    <label for="address_from" class="active">Location</label>
 					                    <div id="map" style="width:100%; height: 500px; top: 35px; border-radius: 4px; margin-bottom:60px"></div>
 					                </div>                
-					                <input type="text" id ="address_from_coord" name="address_from_coord" value="{{ address_from_coord}}" hidden>
+					                <input type="text" id ="address_from_coord" name="address_from_coord" value="{{ report.address_from_coord}}" hidden>
 	                               
 		                            
 		                            <div class="input-field col s11 offset-s1">
@@ -154,7 +154,7 @@
 
 		                            <div class="input-field col s11 offset-s1">
 	                                    <i class="mdi-av-play-circle-fill prefix sm-green-text"></i>
-	                                    <input id="video_url" name="video_url" class="materialize-textarea" length="100" type="text">
+	                                    <input id="video_url" name="video_url" class="materialize-textarea" length="100" type="text" value="{{report.video_url}}">
 	                                    <label for="video_url">If you have a youtube video please add it here:</label>
 	                                </div>                                            
 		    	                
@@ -316,6 +316,16 @@
 			centerControlDiv.index = 1;
 			map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
     		
+
+			document.getElementById('kind').value = "{{report.kind}}";
+			document.getElementById('catGroup').value = "{{report.likeability}}";
+			document.getElementById('subCat').value = "{{report.feeling}}";
+			document.getElementById('title').value = "{{report.title}}";
+			document.getElementById('description').value = "{{report.description}}";
+			document.getElementById('video_url').value = "{{report.video_url}}";
+
+
+
     		$( "#submit_report_form" ).click(function() {
     			uphone = document.getElementById('userphone').value;
     			uaddress = document.getElementById('useraddress').value;
@@ -493,7 +503,7 @@
 					feelings += _fls[i] + " ";
 				}
 				document.getElementById('subCat').value = feelings.substr(0,feelings.length-1);
-			}
+		}
 
 	</script>
 {% endblock %}

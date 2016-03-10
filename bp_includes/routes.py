@@ -19,6 +19,7 @@ _routes = [
     RedirectRoute('/contact/', handlers.MaterializeLandingContactRequestHandler, name='contact', strict_slash=True),
     RedirectRoute('/faq/', handlers.MaterializeLandingFaqRequestHandler, name='faq', strict_slash=True),
     RedirectRoute('/tou/', handlers.MaterializeLandingTouRequestHandler, name='tou', strict_slash=True),
+    RedirectRoute('/about/', handlers.MaterializeLandingAboutRequestHandler, name='about', strict_slash=True),
     RedirectRoute('/privacy/', handlers.MaterializeLandingPrivacyRequestHandler, name='privacy', strict_slash=True),
     RedirectRoute('/license/', handlers.MaterializeLandingLicenseRequestHandler, name='license', strict_slash=True),
     RedirectRoute('/register/', handlers.MaterializeRegisterRequestHandler, name='register', strict_slash=True),
@@ -31,6 +32,7 @@ _routes = [
     
     # User
     RedirectRoute('/user/reports/', handlers.MaterializeReportsRequestHandler, name='materialize-reports', strict_slash=True),
+    RedirectRoute('/user/reports/<report_id>/', handlers.MaterializeReportsEditRequestHandler, name='materialize-reports-edit', strict_slash=True),
     RedirectRoute('/user/settings/profile/', handlers.MaterializeSettingsProfileRequestHandler, name='materialize-settings-profile', strict_slash=True),
     RedirectRoute('/user/settings/email/', handlers.MaterializeSettingsEmailRequestHandler, name='materialize-settings-email', strict_slash=True),
     RedirectRoute('/user/settings/password/', handlers.MaterializeSettingsPasswordRequestHandler, name='materialize-settings-password', strict_slash=True),
@@ -39,6 +41,7 @@ _routes = [
     RedirectRoute('/user/change-email/<user_id>/<encoded_email>/<token>', handlers.MaterializeEmailChangedCompleteHandler, name='materialize-email-changed-check', strict_slash=True),
 
     # Report
+    RedirectRoute('/report/list/', handlers.MaterializeReportListHandler, name='materialize-report-list', strict_slash=True),
     RedirectRoute('/report/new/', handlers.MaterializeNewReportHandler, name='materialize-report-new', strict_slash=True),
     RedirectRoute('/report/image/upload/<report_id>', handlers.MaterializeReportUploadImageHandler, name='report-image-upload', strict_slash=True),
     RedirectRoute('/report/success/', handlers.MaterializeNewReportSuccessHandler, name='materialize-report-success', strict_slash=True),

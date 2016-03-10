@@ -1,0 +1,30 @@
+{% extends landing_layout %}
+
+{% block title %}
+	<title>{{app_name}} » About</title>
+{% endblock %}
+
+{% block page_css %}
+<style>
+	
+      p{
+          letter-spacing: 1.2pt;
+          font-family: roboto-light;
+      }
+</style>
+{% endblock %}
+
+{% block header_content %}
+{% endblock %}
+
+{% block body_content %}
+	<div class="container">
+		<div class="section">
+		 <div class="row" style="margin-top: 60px;">
+	        <div class="col s12 m10 offset-m1">
+				<img src="/{{theme}}/materialize/images/landing/about.png" alt="" class="col s12">
+	        </div>
+	      </div>
+		</div>
+	</div>
+{% endblock %}

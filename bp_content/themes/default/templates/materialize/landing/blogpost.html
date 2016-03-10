@@ -1,35 +1,70 @@
 {% extends landing_layout %}
 
-{% block title %}<title>{{app_name}} » Blog Post</title>{% endblock %}
+{% block title %}<title>{{app_name}} » Case Study</title>{% endblock %}
+
+{% block metadata %}
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="{{brief}}" />
+    <meta name="keywords" content="mboilerplate, appengine, materialize, boilerplate, onesmart, webcomponents, google cloud, gae"/>
+    <meta property="og:site_name" content="usocialmaps.com"/>
+    <meta property="og:title" content="usocialmaps.com"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="{{brief}}."/>
+    <meta property="og:url" content="http://usocialmaps.com/blog/"/>
+    <meta property="og:image" content="http://usocialmaps.com/blobstore/serve/{{blob_key}}/"/>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{brief}}.">
+    <meta name="twitter:creator" content="@chuycepeda">
+    <meta name="twitter:title" content="usocialmaps.com case studies">
+    <meta name="twitter:description" content="{{brief}}.">
+    <meta name="twitter:image" content="http://usocialmaps.com/blobstore/serve/{{blob_key}}/">
+    <meta property="twitter:url" content="http://usocialmaps.com"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+{% endblock %}
+
+{% block page_css %}
+	<style>
+
+      p{
+          letter-spacing: 1.2pt;
+          font-family: roboto-light;
+          text-align: justify;
+      }
+
+    </style>
+{% endblock %}
 
 {% block header_content %}
-<div class="parallax-container z-depth-3">
-	<div class="section no-pad-bot">
-	  <div class="container">
-	    <br><br>
-	    <h1 class="header center {{brand_color}}-text text-lighten-2 " >{{title}}</h1>
-	    <div class="row center">
-	      <h5 class="header col s12 white-text light">{{subtitle}}</h5>
-	      <h6 class="header col s12 white-text light center"> by {{author}}</h6>
+	<div class="parallax-container z-depth-3">
+	    <div class="section no-pad-bot">
+	      <div class="container row">
+	        <div class="card-panel col m3 offset-m8 s8 offset-s4 z-index-3" style="margin-top: 70px;">
+	          <h5 class="header col s12 brand-color-text light" style="line-height: 40px;">{{title}}<br><span style="font-family: roboto-thin;">{{subtitle}}</span><br><span style="font-family: roboto-thin;" class="orange-text">Por <a href="http://www.twitter.com/{{author}}" target="_blank">@{{author}}</a></span><br>
+	        <div class="row center">
+	          <a class="glow btn-floating btn-large brand-color" href="#more"><i class="mdi-navigation-expand-more"></i></a>
+	        </div>    
+	          </h5>
+	        </div>
+	      </div>
 	    </div>
-	    <div class="row center">
-	    </div>
-	    <br>
-	    <br>
-	  </div>
+	    <div class="parallax"><img src="/blobstore/serve/{{blob_key}}/"></div>
 	</div>
-	<div class="parallax"><img src="/blobstore/serve/{{blob_key}}/" alt="Unsplashed background img 1" style="display: block; transform: translate3d(-50%, 351px, 0px); -webkit-filter: brightness(70%);"></div>
-</div>
+
+
 {% endblock %}
 
 {% block body_content %}
 <div class="container">
-	<div class="section">
-		<div class="row" style="padding:60px;">
+	<div class="section" id="more">
+		<div class="row card" style="{% if not is_mobile %}padding:60px;font-size:18px;{% else %}padding:20px;{% endif %}">
+			<h2>{{title}}</h2>
+			<h4>{{subtitle}}</h4>
+			<br><br>
 			{{content}}
 		</div>
 		<div class="col s12 center">
-		  <a style="margin-bottom:30px;" href="{{uri_for("blog")}}" class="waves-effect waves-light {{brand_color}} white-text btn-large "><i class="mdi-navigation-arrow-back left"></i>Back to blog</a>
+		  <a style="margin-bottom:30px;" href="{{uri_for("blog")}}" class="waves-effect waves-light brand-color white-text btn-large "><i class="mdi-navigation-arrow-back left"></i>Back to case studies</a>
 		</div>
 	</div>
 </div>
