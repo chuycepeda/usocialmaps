@@ -91,6 +91,19 @@
 				.btn-floating:hover{
 					background-color: #59CEDF;
 				}
+				.videoWrapper {
+					position: relative;
+					padding-bottom: 56.25%; 
+					padding-top: 25px;
+					height: 0;
+				}
+				.videoWrapper iframe {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
 	    	</style>
 		    {% block page_css %}
 			<style>
@@ -199,6 +212,7 @@
 				  </a>
 				  <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-more-vert grey-text"></i></a>
 				  <ul id="nav-mobile" class="right hide-on-med-and-down">
+				  	<li id="nav-gh"><a href="https://github.com/chuycepeda/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/github.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
 				  	<li id="nav-fb"><a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
 				  	<li id="nav-tw"><a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
 				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
@@ -575,6 +589,15 @@
 		              </div>
 		          </div>
 		    </div>
+		    <div id="modal4" class="modal">
+		      	  <i class="mdi-navigation-close brand-color-text right modal-action modal-close" style="padding: 2px;"></i>
+                  <div class="modal-content">
+                    <div class="videoWrapper">
+					    <!-- Copy & Pasted from YouTube -->
+					    <iframe width="560" height="315" src="https://www.youtube.com/embed/WoZVWreyYX4" frameborder="0" allowfullscreen></iframe>
+					</div>
+                  </div>
+            </div>
 		{% endblock %}
 
 		{% block right_sidebar %}
@@ -691,6 +714,11 @@
 						$(".menu-item").click(function(){
 							$('.button-collapse').sideNav('hide');
 						});
+
+						{% if path == uri_for('landing') %}
+							$('#modal4').openModal();
+						{% endif %}
+
 
 						var BrowserDetect = {
 							init: function() {
@@ -1060,9 +1088,9 @@
 							tileStyle += "#" + table + "[likeability='" + catMarkers[i][0] + "']{marker-file:url('" + sourceurl + catMarkers[i][1] + "');}";
 						}
 						
-						tileStyle += "#" + table + "[kind='idea']{marker-file:url('" + sourceurl + "idea.png');}";
-						tileStyle += "#" + table + "[kind='project']{marker-file:url('" + sourceurl + "idea.png');}";
-						tileStyle += "#" + table + "[kind='intervention']{marker-file:url('" + sourceurl + "intervention.png');}";
+						tileStyle += "#" + table + "[kind='idea']{marker-file:url('" + sourceurl + "idea.png');marker-width: 15;}";
+						tileStyle += "#" + table + "[kind='project']{marker-file:url('" + sourceurl + "idea.png');marker-width: 55;}";
+						tileStyle += "#" + table + "[kind='intervention']{marker-file:url('" + sourceurl + "intervention.png');marker-width: 45;}";
 						
 						//tileStyle += closeStyle;
 						return tileStyle;
@@ -1346,7 +1374,7 @@
 						loadComments($('#report_uuid').val());
 						getgSV(latlng)
 
-						if (data.video_url)
+						if (data.video_url){
 							if (data.video_url.indexOf('http') != -1){
 								if (data.video_url.indexOf('embed') != -1)
 									$('#report_video').html('<iframe width="640" height="360" src="'+data.video_url+'" frameborder="0" allowfullscreen=""></iframe>');
@@ -1357,6 +1385,10 @@
 							}else{
 								$('#video-row').hide();
 							}
+						}
+						else{
+							$('#video-row').hide();
+						}
 
 						$('#modal3').openModal();
 						if (document.getElementById('close-infowindow')) document.getElementById('close-infowindow').click();
@@ -1732,7 +1764,6 @@
                     </div> 
                     {% endraw %}  
                 </script>
-
 			{% endblock %}			
 		{% endblock %}
 

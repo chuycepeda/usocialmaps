@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block header_content %}
-  <div class="row spacer"></div>
+  <div class="parallax-container z-depth-3" style="max-height:200px;overflow:hidden;">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <h2 class="header center white-text" style="margin-top: 85px;">Case studies</h2>
+      </div>
+    </div>
+    <div class="parallax sm-green"></div>
+  </div>
 {% endblock %}
 
 {% block body_content %}
@@ -31,7 +38,6 @@
                     <div class="card-content" style="background:white;">
                       <span class="card-title activator grey-text text-darken-4">{{title}} <i class="mdi-navigation-more-vert right"></i></span>
 	                  <p style="font-family: roboto-thin;" class="ultra-small">{{updated}}</p>
-                      <p style="font-family: roboto-thin;">{{subtitle}}</p>
                       <p class="ultra-small {{brand_color}}-text">#: {{category}}</p>
                     </div>
                     <div class="card-action">

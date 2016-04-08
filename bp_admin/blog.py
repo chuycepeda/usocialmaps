@@ -110,25 +110,29 @@ class AdminBlogEditHandler(BaseHandler):
                 blog.category = self.request.get('category').split(',')
                 blog.put()
 
-        #re-post to blobstore, documented at: https://code.google.com/p/googleappengine/issues/detail?id=2749#makechanges
-        from google.appengine.api import urlfetch
-        from poster.encode import multipart_encode, MultipartParam
-        payload = {}
-        file_data = self.request.POST['file']
-        payload['file'] = MultipartParam('file', filename=file_data.filename,
-                                              filetype=file_data.type,
-                                              fileobj=file_data.file)
-        data,headers= multipart_encode(payload)
-        upload_url = blobstore.create_upload_url('/admin/blog/upload/%s/' % blog.key.id())        
-        t = urlfetch.fetch(url=upload_url, payload="".join(data), method=urlfetch.POST, headers=headers)
+        if hasattr(self.request.POST['file'], 'filename'):
+            #re-post to blobstore, documented at: https://code.google.com/p/googleappengine/issues/detail?id=2749#makechanges
+            from google.appengine.api import urlfetch
+            from poster.encode import multipart_encode, MultipartParam
+            payload = {}
+            file_data = self.request.POST['file']
+            payload['file'] = MultipartParam('file', filename=file_data.filename,
+                                                  filetype=file_data.type,
+                                                  fileobj=file_data.file)
+            data,headers= multipart_encode(payload)
+            upload_url = blobstore.create_upload_url('/admin/blog/upload/%s/' % blog.key.id())        
+            t = urlfetch.fetch(url=upload_url, payload="".join(data), method=urlfetch.POST, headers=headers)
 
-        #output toast message
-        if t.content == 'success':
+            #output toast message
+            if t.content == 'success':
+                self.add_message(messages.saving_success, 'success')
+                return self.redirect_to('admin-blog')
+            else:
+                self.add_message(messages.saving_error, 'danger')
+                return self.get(post_id = blog.key.id())
+        else:
             self.add_message(messages.saving_success, 'success')
             return self.redirect_to('admin-blog')
-        else:
-            self.add_message(messages.saving_error, 'danger')
-            return self.get(post_id = blog.key.id())
 
 class AdminBlogUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self, post_id):
