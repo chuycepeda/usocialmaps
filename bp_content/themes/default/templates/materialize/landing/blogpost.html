@@ -61,8 +61,11 @@
 	<div class="section" id="more">
 		<div class="row card" style="{% if not is_mobile %}padding:60px;font-size:18px;{% else %}padding:20px;{% endif %}">
 			{{content}}
-			<p>Total reports: <span id="rep_count"></span></p>
-			<div id="map" style="min-height: 450px;"></div>
+			<!-- <p>Total reports: <span id="rep_count"></span></p> -->
+			<div class="col s12 center">
+			  <a style="margin-bottom:30px;" href="{{uri_for("landing")}}?polygon_name={{subtitle}}" class="waves-effect waves-light brand-secondary-color white-text btn-large" target="_blank">View Map</a>
+			</div>
+			<div id="map" style="{% if is_mobile %}min-height: 450px;{% else %}min-height: 800px;{% endif %}; display:none"></div>
 		</div>
 		<div class="col s12 center">
 		  <a style="margin-bottom:30px;" href="{{uri_for("blog")}}" class="waves-effect waves-light brand-color white-text btn-large "><i class="mdi-navigation-arrow-back left"></i>Back to case studies</a>

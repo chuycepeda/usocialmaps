@@ -211,30 +211,27 @@
                     </div>
 				  </a>
 				  <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-more-vert grey-text"></i></a>
-				  <ul id="nav-mobile" class="right hide-on-med-and-down">
-				  	<li id="nav-gh"><a href="https://github.com/chuycepeda/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/github.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
-				  	<li id="nav-fb"><a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
-				  	<li id="nav-tw"><a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 35px;     margin-top: 15px;"></a></li>
-				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
-				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Contact</a></li>
-				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Case Studies</a></li>
+				  <ul id="nav-mobile" class="right hide-on-med-and-down">				  	
+				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item white grey-text" target="_blank" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if path == uri_for('about') %}border-bottom:5px solid #9CC768{% endif %}">About</a></li>
+				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item white grey-text" target="_blank" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if path == uri_for('contact') %}border-bottom:5px solid #9CC768{% endif %}">Contact</a></li>
+				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item white grey-text" target="_blank" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if uri_for('blog') in path %}border-bottom:5px solid #9CC768{% endif %}">Case Studies</a></li>
 				    {% if not user_id %}
 				    	{% if path != uri_for('landing') %}
-					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Map</a></li>
 					    {% endif %}
 					    {% if path != uri_for('materialize-report-new') and path != uri_for('login')%}
-					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
 					    {% endif %}
 
-					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Login</a></li>
-					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
+					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Login</a></li>
+					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
 					    
 				    {% else %}
 				    	{% if path != uri_for('landing') %}
-					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Map</a></li>
 					    {% endif %}
 					    {% if path != uri_for('materialize-report-new') %}
-					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
 					    {% endif %}
 					    <ul id="profile-dropdown" class="dropdown-content" style="margin-top:10px; border-radius:4px; padding:10px">
 			                  <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
@@ -262,9 +259,7 @@
 				    {% endif %}
 				  </ul>
 				  <ul class="side-nav" id="mobile-demo">
-				    <li id="nav-fb"><a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 70px;"></a></li>
-				  	<li id="nav-tw"><a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 70px;"></a></li>
-				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
+				    <li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
 				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Contact</a></li>
 				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Case Studies</a></li>
 				    {% if not user_id %}
@@ -325,7 +320,7 @@
 				<div>
 	            	<input id="search_address" type="text" placeholder="Search address... 🔎" onkeydown="if (event.keyCode == 13) codeAddress('search_address');" style="background-color: white;border-radius: 40px;line-height: 20px;text-align: center;">
 				</div>
-                <ul class="collapsible collapsible-accordion" data-collapsible="expandable" onclick="$('#right-sidebar-nav').hide()" style="opacity: 0.9;">
+                <ul class="collapsible collapsible-accordion" data-collapsible="expandable" onclick="" style="opacity: 0.9;">
                   <li>
                     <div class="collapsible-header white-text truncate sm-blue"> Currently <span id="rep_count" style="font-family: roboto-regular;">0</span> reports.</div>
                   </li>
@@ -589,15 +584,6 @@
 		              </div>
 		          </div>
 		    </div>
-		    <div id="modal4" class="modal">
-		      	  <i class="mdi-navigation-close brand-color-text right modal-action modal-close" style="padding: 2px;"></i>
-                  <div class="modal-content">
-                    <div class="videoWrapper">
-					    <!-- Copy & Pasted from YouTube -->
-					    <iframe width="560" height="315" src="https://www.youtube.com/embed/WoZVWreyYX4" frameborder="0" allowfullscreen></iframe>
-					</div>
-                  </div>
-            </div>
 		{% endblock %}
 
 		{% block right_sidebar %}
@@ -636,7 +622,9 @@
 			<footer class="page-footer" style="margin-top:0!important; background-color:#f1f1f1!important">
 				<div class="footer-copyright " style="text-align:right;">
 				  <div class="container">
-				  	<a class="white-text" href="{{uri_for("license")}}">MIT License - </a>© 2015 Social Maps, All rights reserved. Powered by <a class="white-text tooltipped" data-position="top" data-delay="50" data-tooltip="Try the Konami-code" href="http://usocialmaps.appspot.com" target="_blank">the amazing MBoilerplate.</a> | <a class="white-text" href="{{uri_for('tou')}}">Terms of Use</a> | <a class="white-text" href="{{uri_for('privacy')}}"> Privacy Policy</a>
+				  	<a class="white-text" href="{{uri_for("license")}}">MIT License - </a>© 2015 Social Maps, All rights reserved. Powered by <a class="white-text tooltipped" data-position="top" data-delay="50" data-tooltip="Try the Konami-code" href="http://usocialmaps.appspot.com" target="_blank">the amazing MBoilerplate.</a> | <a class="white-text" href="{{uri_for('tou')}}">Terms of Use</a> | <a class="white-text" href="{{uri_for('privacy')}}"> Privacy Policy</a> | <a href="https://github.com/chuycepeda/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/github.png" alt="" style="    height: 35px; margin-bottom: -10px;"></a> | <a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 35px;margin-bottom: -10px;"></a> |  <a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 35px; margin-bottom: -10px;"></a>
+
+
 				  </div>
 				</div>
 			</footer>
@@ -714,10 +702,6 @@
 						$(".menu-item").click(function(){
 							$('.button-collapse').sideNav('hide');
 						});
-
-						{% if path == uri_for('landing') %}
-							$('#modal4').openModal();
-						{% endif %}
 
 
 						var BrowserDetect = {
@@ -932,6 +916,7 @@
 						];
 					/* FILTERS RELATED */
 					var _lks = [], _fls = [], _kinds = [];
+					var polygon_name = false;
 
 					/* MAPS RELATED */
 					var geocoder = new google.maps.Geocoder();
@@ -944,7 +929,7 @@
 						var mapOptions = {
 							center: new google.maps.LatLng(mapCenter[0], mapCenter[1]),
 							zoom: 4,
-							minZoom:4,
+							minZoom:2,
 							zoomControl: true,
 							zoomControlOptions: {
 								style: google.maps.ZoomControlStyle.SMALL,	
@@ -984,52 +969,103 @@
 						centerControlDiv.index = 1;
 						map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
-						_query= "SELECT * FROM " + _table_name;	    
-                        var interactivity_ = "cartodb_id, address, description, feeling, follows, image_url, likeability, title, uuid, video_url, kind";
-						var layerSource = {
-                            user_name: _user_name,
-                            type: 'cartodb',
-                            sublayers: [{
-                                sql: _query,
-                                cartocss: createTileStyle('normal', _table_name),
-                                interactivity: interactivity_
-
-                            }]
-                        };                        
-                        cartodb.createLayer(map,layerSource)
-                        .on('done', function(layer) {
-						    map.overlayMapTypes.setAt(0, layer);
-                            for (var i = 0; i < layer.getSubLayerCount(); i++) {
-                               sublayers[i] = layer.getSubLayer(i);
-                               console.log("Congrats, you added sublayer #" + i + "!");
-                            }
-                            
-                            sublayers[0].infowindow.set('template', $('#infowindow_'+_table_name).html());
-                            cdb.vis.Vis.addInfowindow(map, sublayers[0], interactivity_, {
-                                infowindowTemplate: $('#infowindow_'+_table_name).html()
-                            });
-                            sublayers[0].setInteraction(true);      
-                            sublayers[0].on('featureClick', function(e, latlng, pos, data) {
-                            	  console.log(data);
-                            	  console.log(latlng);
-                            	  populateModal(data, latlng);
-						    });  
-
-						    _sql.execute(_query).done(function(data) {
-							        $('#rep_count').html(addCommas(data.total_rows));
-						    }) 
-
-						    _sql.getBounds(_query).done(function(bounds) {
-						    	var _bounds = new google.maps.LatLngBounds();
-							    _bounds.extend(new google.maps.LatLng(bounds[0][0], bounds[0][1]));
-							    _bounds.extend(new google.maps.LatLng(bounds[1][0], bounds[1][1]));
-							    map.fitBounds(_bounds);
-						    });
-
-
-                        });
-
 						var obj = getUrlVars();
+						polygon_name = decodeURI(obj.polygon_name) != "undefined"  ? decodeURI(obj.polygon_name) : false;
+
+
+						if (!polygon_name){
+							_query= "SELECT * FROM " + _table_name;	    
+	                        var interactivity_ = "cartodb_id, address, description, feeling, follows, image_url, likeability, title, uuid, video_url, kind";
+							var layerSource = {
+	                            user_name: _user_name,
+	                            type: 'cartodb',
+	                            sublayers: [{
+	                                sql: _query,
+	                                cartocss: createTileStyle('normal', _table_name),
+	                                interactivity: interactivity_
+
+	                            }]
+	                        };                        
+	                        cartodb.createLayer(map,layerSource)
+	                        .on('done', function(layer) {
+							    map.overlayMapTypes.setAt(0, layer);
+	                            for (var i = 0; i < layer.getSubLayerCount(); i++) {
+	                               sublayers[i] = layer.getSubLayer(i);
+	                               console.log("Congrats, you added sublayer #" + i + "!");
+	                            }
+	                            
+	                            sublayers[0].infowindow.set('template', $('#infowindow_'+_table_name).html());
+	                            cdb.vis.Vis.addInfowindow(map, sublayers[0], interactivity_, {
+	                                infowindowTemplate: $('#infowindow_'+_table_name).html()
+	                            });
+	                            sublayers[0].setInteraction(true);      
+	                            sublayers[0].on('featureClick', function(e, latlng, pos, data) {
+	                            	  console.log(data);
+	                            	  console.log(latlng);
+	                            	  populateModal(data, latlng);
+							    });  
+
+							    _sql.execute(_query).done(function(data) {
+								        $('#rep_count').html(addCommas(data.total_rows));
+							    }) 
+
+							    _sql.getBounds(_query).done(function(bounds) {
+							    	var _bounds = new google.maps.LatLngBounds();
+								    _bounds.extend(new google.maps.LatLng(bounds[0][0], bounds[0][1]));
+								    _bounds.extend(new google.maps.LatLng(bounds[1][0], bounds[1][1]));
+								    map.fitBounds(_bounds);
+							    });
+	                        });
+						}else{
+							_query= "SELECT public_reports.* FROM public_reports, public_polygons WHERE ST_Intersects(public_reports.the_geom, public_polygons.the_geom) AND public_polygons.polygon_name IN ('"+polygon_name+"')";	    
+							polygon_query= "SELECT public_polygons.* FROM public_polygons WHERE public_polygons.polygon_name IN ('"+polygon_name+"')";	    
+				            var interactivity_ = "cartodb_id, address, description, feeling, follows, image_url, likeability, title, uuid, video_url, kind";
+							var layerSource = {
+				                user_name: _user_name,
+				                type: 'cartodb',
+				                sublayers: [{
+				                    sql: polygon_query,
+				                    cartocss: "#public_polygons{line-color: #FB3517;line-width: 1.5;line-opacity: 0.9;polygon-fill: #FFFFFF; polygon-opacity: 0.4;}"
+				                },{
+				                    sql: _query,
+				                    cartocss: createTileStyle('normal', _table_name),
+				                    interactivity: interactivity_
+				                }]
+				            };                        
+				            cartodb.createLayer(map,layerSource)
+				            .on('done', function(layer) {
+							    map.overlayMapTypes.setAt(0, layer);
+				                for (var i = 0; i < layer.getSubLayerCount(); i++) {
+				                   sublayers[i] = layer.getSubLayer(i);
+				                   console.log("Congrats, you added sublayer #" + i + "!");
+				                }
+				                
+				                sublayers[1].infowindow.set('template', $('#infowindow_'+_table_name).html());
+				                cdb.vis.Vis.addInfowindow(map, sublayers[1], interactivity_, {
+				                    infowindowTemplate: $('#infowindow_'+_table_name).html()
+				                });
+				                sublayers[1].setInteraction(true);      
+				                sublayers[1].on('featureClick', function(e, latlng, pos, data) {
+				                	  console.log(data);
+				                	  console.log(latlng);
+				                	  populateModal(data, latlng);
+							    });  
+
+							    _sql.execute(_query).done(function(data) {
+								        $('#rep_count').html(addCommas(data.total_rows));
+							    }) 
+
+							    _sql.getBounds(_query).done(function(bounds) {
+							    	var _bounds = new google.maps.LatLngBounds();
+								    _bounds.extend(new google.maps.LatLng(bounds[0][0], bounds[0][1]));
+								    _bounds.extend(new google.maps.LatLng(bounds[1][0], bounds[1][1]));
+								    map.fitBounds(_bounds);
+								    map.setZoom(10);
+							    });
+
+
+				            });
+						}
 						if (obj.cdb_id){
 							var query = "select st_y(the_geom) as lat, st_x(the_geom) as lon, image_url, cartodb_id, follows, uuid, likeability, description, title, feeling, address from "+_table_name+" where cartodb_id = " + obj.cdb_id;
 							_sql.execute(query).done(function(data) {
@@ -1331,9 +1367,20 @@
 							_query = "SELECT * FROM " + _table_name + " WHERE (" + feelings.substr(0,feelings.length-4) + ")";
 						else if (kinds == '' && likeabilities == '' && feelings == '')
 							_query = "SELECT * FROM " + _table_name;
+
+						if (polygon_name){
+							_query = _query.replace('* FROM ' + _table_name , 'public_reports.* FROM public_reports, public_polygons');
+							if (_query.indexOf('WHERE') != -1)
+								_query += " AND";
+							else
+								_query += " WHERE";
+							_query += " (ST_Intersects(public_reports.the_geom, public_polygons.the_geom) AND public_polygons.polygon_name IN ('"+polygon_name+"'))";
+            				sublayers[1].setSQL(_query);
+						}else{
+            				sublayers[0].setSQL(_query);
+						}
 						console.log('_query:', _query);
             			
-            			sublayers[0].setSQL(_query);
 						_sql.execute(_query).done(function(data) {
 							$('#rep_count').html(addCommas(data.total_rows));
 						}) 
@@ -1577,10 +1624,13 @@
 
 					function populateSidebar(){
 						var html = "", query = "select st_y(the_geom) as lat, st_x(the_geom) as lon, * from "+_table_name + " order by created desc offset "+OFFSET+" limit 25 ";
+						if (polygon_name){
+							query = "select st_y(public_reports.the_geom) as lat, st_x(public_reports.the_geom) as lon, public_reports.* from "+_table_name + ", public_polygons where ST_Intersects(public_reports.the_geom, public_polygons.the_geom) AND public_polygons.polygon_name IN ('"+polygon_name+"') order by created desc offset "+OFFSET+" limit 25 ";
+						}
 						_sql.execute(query).done(function(data) {
 					        if(data.total_rows >= 0) {
 							    for(var i=0,j=data.total_rows;i<j;i++){
-							    	html += '<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;">';
+							    	html += '<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
 					                if (data.rows[i].image_url != 'None')
 					                	html += '';//'<img src="'+data.rows[i].image_url+'" alt="" class="circle">';
 					               	else
@@ -1624,11 +1674,11 @@
 							    }
 
 							    if (data.total_rows == 0){
-							    	html += '<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;">';
+							    	html += '<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
 									html += '<div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span class="btn grey disabled white-text" >Loaded all</a></div>';
 									html+='</li>';
 							    }else{
-							    	html += '<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;">';
+							    	html += '<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
 									html += '<div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</a></div>';
 									html+='</li>';
 							    }
@@ -1636,7 +1686,7 @@
 							    
 
 								var current_html = $('#report_list').html();
-								current_html = current_html.replace('<li class="collection-item avatar" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.85);    padding: 20px;     border-radius: 25px!important;"><div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</span></div></li>','');
+								current_html = current_html.replace('<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;"><div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</span></div></li>','');
 							    
 								var new_html = current_html + html;
 								OFFSET += 25;
