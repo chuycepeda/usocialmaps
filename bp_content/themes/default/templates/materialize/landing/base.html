@@ -1630,7 +1630,7 @@
 						_sql.execute(query).done(function(data) {
 					        if(data.total_rows >= 0) {
 							    for(var i=0,j=data.total_rows;i<j;i++){
-							    	html += '<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
+							    	html += '<li class="collection-item avatar card-panel" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
 					                if (data.rows[i].image_url != 'None')
 					                	html += '';//'<img src="'+data.rows[i].image_url+'" alt="" class="circle">';
 					               	else
@@ -1674,11 +1674,11 @@
 							    }
 
 							    if (data.total_rows == 0){
-							    	html += '<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
+							    	html += '<li class="collection-item avatar card-panel" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
 									html += '<div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span class="btn grey disabled white-text" >Loaded all</a></div>';
 									html+='</li>';
 							    }else{
-							    	html += '<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
+							    	html += '<li class="collection-item avatar card-panel" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;">';
 									html += '<div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</a></div>';
 									html+='</li>';
 							    }
@@ -1686,7 +1686,7 @@
 							    
 
 								var current_html = $('#report_list').html();
-								current_html = current_html.replace('<li class="collection-item avatar z-depth-2" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;"><div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</span></div></li>','');
+								current_html = current_html.replace('<li class="collection-item avatar card-panel" style="height:auto;margin-bottom:10px;border-radius:4px;background-color: rgba(255, 255, 255, 0.995);    padding: 20px;     border-radius: 4px!important;"><div class="row center" style="cursor:pointer;     margin-bottom: 0px;"><span onclick="populateSidebar();" class="btn">Load more</span></div></li>','');
 							    
 								var new_html = current_html + html;
 								OFFSET += 25;
