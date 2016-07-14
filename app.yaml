@@ -141,10 +141,10 @@ handlers:
   static_files: bp_content/themes/\1/static/materialize/font/\2/\3
   upload: bp_content/themes/(\w*)/static/materialize/font/(\w*)/(.*\.(ttf|woff|woff2|eot|svg))$
 
-# # @bp_content - materialize audio
-# - url: /(\w*)/materialize/audio/(.*\.(ogg|mp3))$
-#   static_files: bp_content/themes/\1/static/materialize/audio/\2
-#   upload: bp_content/themes/(\w*)/static/materialize/audio/(.*\.(ogg|mp3))$
+# @bp_content - materialize audio
+- url: /(\w*)/materialize/audio/(.*\.(ogg|mp3))$
+  static_files: bp_content/themes/\1/static/materialize/audio/\2
+  upload: bp_content/themes/(\w*)/static/materialize/audio/(.*\.(ogg|mp3))$
 
 
 # @taskqueue email sender

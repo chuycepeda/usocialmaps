@@ -212,33 +212,33 @@
 				  </a>
 				  <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-more-vert grey-text"></i></a>
 				  <ul id="nav-mobile" class="right hide-on-med-and-down">				  	
-				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item white grey-text" target="_blank" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if path == uri_for('about') %}border-bottom:5px solid #9CC768{% endif %}">About</a></li>
-				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item white grey-text" target="_blank" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if path == uri_for('contact') %}border-bottom:5px solid #9CC768{% endif %}">Contact</a></li>
-				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item white grey-text" target="_blank" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if uri_for('blog') in path %}border-bottom:5px solid #9CC768{% endif %}">Case Studies</a></li>
+				  	<li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item white grey-text" target="_blank" data-translate="about" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if path == uri_for('about') %}border-bottom:5px solid #9CC768{% endif %}">About</a></li>
+				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item white grey-text" target="_blank" data-translate="contact" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if path == uri_for('contact') %}border-bottom:5px solid #9CC768{% endif %}">Contact</a></li>
+				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item white grey-text" target="_blank" data-translate="cases" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;{% if uri_for('blog') in path %}border-bottom:5px solid #9CC768{% endif %}">Case Studies</a></li>
 				    {% if not user_id %}
 				    	{% if path != uri_for('landing') %}
-					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Map</a></li>
+					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item white grey-text" data-translate="map" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Map</a></li>
 					    {% endif %}
 					    {% if path != uri_for('materialize-report-new') and path != uri_for('login')%}
-					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" data-translate="place" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
 					    {% endif %}
 
-					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Login</a></li>
-					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
+					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white grey-text" data-translate="login" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Login</a></li>
+					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white grey-text" data-translate="signup" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
 					    
 				    {% else %}
 				    	{% if path != uri_for('landing') %}
-					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Map</a></li>
+					    <li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item white grey-text" data-translate="map" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Map</a></li>
 					    {% endif %}
 					    {% if path != uri_for('materialize-report-new') %}
-					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+					    <li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" data-translate="place" style="font-family: roboto-light;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
 					    {% endif %}
 					    <ul id="profile-dropdown" class="dropdown-content" style="margin-top:10px; border-radius:4px; padding:10px">
-			                  <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
+			                  <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" data-translate="profile" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
 		                        </li>
-		                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("materialize-reports") }}">My reports</a>
+		                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" data-translate="reports" href="{{ uri_for("materialize-reports") }}">My reports</a>
 		                        </li>
-		                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" href="{{ uri_for("logout") }}">Logout</a>
+		                      <li><a  style="font-size: 1rem;padding: 0.5rem; font-family:roboto-medium;" class="{{brand_color}}-text" data-translate="logout" href="{{ uri_for("logout") }}">Logout</a>
 		                        </li>
 			            </ul>
 					    <li class="nav-user" style="margin-right: -32px; height: 65px;">
@@ -259,18 +259,18 @@
 				    {% endif %}
 				  </ul>
 				  <ul class="side-nav" id="mobile-demo">
-				    <li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
-				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item btn white grey-text" target="_blank" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Contact</a></li>
-				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item btn white grey-text" target="_blank" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Case Studies</a></li>
+				    <li id="nav-about"><a href="{{uri_for('about')}}" class="menu-item btn white grey-text" target="_blank" data-translate="about" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">About</a></li>
+				  	<li id="nav-contact"><a href="{{uri_for('contact')}}" class="menu-item btn white grey-text" target="_blank" data-translate="contact" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Contact</a></li>
+				  	<li id="nav-studies"><a href="{{uri_for('blog')}}" class="menu-item btn white grey-text" target="_blank" data-translate="cases" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Case Studies</a></li>
 				    {% if not user_id %}
 				    	{% if path != uri_for('landing') %}
-						<li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
+						<li id="nav-lan"><a href="{{ uri_for('landing') }}" class="menu-item btn white grey-text" data-translate="map" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Map</a></li>
 						{% endif %}
 						{% if path != uri_for('materialize-report-new') and path != uri_for('login')%}
-						<li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
+						<li id="nav-rep-new"><a href="{{ uri_for('materialize-report-new') }}" class="menu-item btn white grey-text" data-translate="place" style="font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Add a place</a></li>
 						{% endif %}
-					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white " style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Login</a></li>
-					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white " style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
+					    <li id="nav-login"><a href="#modal1" class="modal-trigger menu-item btn white " data-translate="login" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Login</a></li>
+					    <li id="nav-register"><a href="#modal2" class="modal-trigger menu-item btn white " data-translate="signup" style="margin-top:40px;font-family: roboto-black;margin-left: 20px;margin-right: 20px;">Sign up</a></li>
 				    {% else %}
 					    <li class="no-padding">
 	                        <ul class="collapsible collapsible-accordion">
@@ -283,11 +283,11 @@
 									{% endif %}
 	                            	<div class="collapsible-body">
 	                                    <ul>
-										  <li><a style="font-family:roboto-medium;" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
+										  <li><a data-translate="profile" style="font-family:roboto-medium;" href="{{ uri_for("materialize-settings-profile") }}">Profile</a>
 			                                </li>
-			                              <li><a style="font-family:roboto-medium;" href="{{ uri_for("materialize-reports") }}">My reports</a>
+			                              <li><a data-translate="reports" style="font-family:roboto-medium;" href="{{ uri_for("materialize-reports") }}">My reports</a>
 			                                </li>
-			                              <li><a style="font-family:roboto-medium;" href="{{ uri_for("logout") }}">Logout</a>
+			                              <li><a data-translate="logout" style="font-family:roboto-medium;" href="{{ uri_for("logout") }}">Logout</a>
 			                                </li>
 	                                    </ul>
 	                                </div>
@@ -447,21 +447,21 @@
 		            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 			        <div class="row">
 			          <div class="input-field col s12 center">
-			            <p class="center login-form-text">Use your email and password to login</p>
+			            <p class="center login-form-text" data-translate="login-title">Use your email and password to login</p>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-social-person-outline prefix"></i>
 			            <input id="login_email" name="email" type="email" class="validate">
-			            <label for="email" class="center-align">Email</label>
+			            <label for="email" class="center-align" data-translate="login-email">Email</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-action-lock-outline prefix"></i>
 			            <input id="login_password" name="password" type="password">
-			            <label for="password">Password</label>
+			            <label for="password" data-translate="login-pass">Password</label>
 			          </div>
 			        </div>
 			        <div class="row">          
@@ -472,12 +472,12 @@
 			        </div>
 			        <div class="row">
 			          <div class="input-field col s12">
-			            <a class="btn-large sm-green waves-effect waves-light col s12" style="cursor:pointer;" onclick="sendForm('form_login_user')">Login</a>
+			            <a class="btn-large sm-green waves-effect waves-light col s12" style="cursor:pointer;" onclick="sendForm('form_login_user')" data-translate="login-login">Login</a>
 			          </div>
 			        </div>
 			        <div class="row">
 			        	<p class="margin right-align medium-small left"><a target="_blank" href="{{uri_for("faq")}}">FAQ</a></p>
-				        <p class="margin right-align medium-small right"><a target="_blank" href="{{ uri_for("password-reset") }}">Forgot your password?</a></p>
+				        <p class="margin right-align medium-small right"><a target="_blank" href="{{ uri_for("password-reset") }}" data-translate="login-forgot">Forgot your password?</a></p>
 			        </div>
 			      </form>
 		      </div>
@@ -489,28 +489,28 @@
 		            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 			        <div class="row">
 			          <div class="input-field col s12 center">
-			            <p class="center login-form-text">Join the community and become a social mapper!</p>
+			            <p class="center login-form-text" data-translate="register-title">Join the community and become a social mapper!</p>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-social-person-outline prefix"></i>
 			            <input id="register_name" name="name" type="text">
-			            <label for="name" class="center-align">Name</label>
+			            <label for="name" class="center-align" data-translate="register-name">Name</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-communication-email prefix"></i>
 			            <input id="register_email" name="email" type="email" class="validate">
-			            <label for="email" class="center-align">Email</label>
+			            <label for="email" class="center-align" data-translate="register-email">Email</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-action-lock-outline prefix"></i>
 			            <input id="register_password" name="password" type="password">
-			            <label for="password">Password</label>
+			            <label for="password" data-translate="register-pass">Password</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
@@ -520,12 +520,12 @@
 			        </div>
 			        <div class="row">
 			          <div class="input-field col s12">
-			            <a class="btn-large sm-blue waves-effect waves-light col s12" style="cursor:pointer;" onclick="sendForm('form_register_user')">Sign up</a>
+			            <a class="btn-large sm-blue waves-effect waves-light col s12" style="cursor:pointer;" onclick="sendForm('form_register_user')" data-translate="register-register">Sign up</a>
 			          </div>
 			        </div>
 			        <div class="row">
-			        	<p class="margin right-align medium-small left"><a target="_blank" href="{{uri_for("tou")}}">Terms of use</a></p>
-				        <p class="margin right-align medium-small right"><a target="_blank" href="{{uri_for("privacy")}}">Privacy policy</a></p>
+			        	<p class="margin right-align medium-small left"><a target="_blank" href="{{uri_for("tou")}}" data-translate="register-tou">Terms of use</a></p>
+				        <p class="margin right-align medium-small right"><a target="_blank" href="{{uri_for("privacy")}}" data-translate="register-privacy">Privacy policy</a></p>
 			        </div>
 			      </form>
 		      </div>
@@ -622,9 +622,7 @@
 			<footer class="page-footer" style="margin-top:0!important; background-color:#f1f1f1!important">
 				<div class="footer-copyright " style="text-align:right;">
 				  <div class="container">
-				  	<a class="white-text" href="{{uri_for("license")}}">MIT License - </a>© 2015 Social Maps, All rights reserved. Powered by <a class="white-text tooltipped" data-position="top" data-delay="50" data-tooltip="Try the Konami-code" href="http://usocialmaps.appspot.com" target="_blank">the amazing MBoilerplate.</a> | <a class="white-text" href="{{uri_for('tou')}}">Terms of Use</a> | <a class="white-text" href="{{uri_for('privacy')}}"> Privacy Policy</a> | <a href="https://github.com/chuycepeda/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/github.png" alt="" style="    height: 35px; margin-bottom: -10px;"></a> | <a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 35px;margin-bottom: -10px;"></a> |  <a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 35px; margin-bottom: -10px;"></a>
-
-
+				  	<a class="white-text" href="{{uri_for("license")}}">MIT License - </a>© 2015 Social Maps, All rights reserved. Powered by <a class="white-text tooltipped" data-position="top" data-delay="50" data-tooltip="Try the Konami-code" href="http://usocialmaps.appspot.com" target="_blank">the amazing MBoilerplate.</a> | <a class="white-text" href="{{uri_for('tou')}}">Terms of Use</a> | <a class="white-text" href="{{uri_for('privacy')}}"> Privacy Policy</a> | <a href="https://github.com/chuycepeda/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/github.png" alt="" style="    height: 35px; margin-bottom: -10px;"></a> | <a href="https://www.facebook.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/facebook-01.png" alt="" style="    height: 35px;margin-bottom: -10px;"></a> |  <a href="https://twitter.com/usocialmaps" class="menu-item grey-text" target="_blank" style="font-family: roboto-black;"><img src="/{{theme}}/materialize/images/socials/twitter-01.png" alt="" style="    height: 35px; margin-bottom: -10px;"></a> | <a style="cursor:pointer;" onclick="forceLang('en');return false;"><img src="/{{theme}}/materialize/images/flags/US.png" alt="English" style="margin-bottom:-8px;    -webkit-filter: grayscale(70%);" /></a> | <a style="cursor:pointer;" onclick="forceLang('es');return false;"><img src="/{{theme}}/materialize/images/flags/Mexico.png" alt="Español" style="margin-bottom:-8px;    -webkit-filter: grayscale(70%);" /></a>
 				  </div>
 				</div>
 			</footer>
@@ -891,6 +889,25 @@
 				</script>
 			{% endblock %}
 
+
+
+			<script src="/{{theme}}/materialize/js/plugins/jquery/jquery.cookies.min.js"></script>
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins/translator/jqueryTranslator.min.js"></script>
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins/translator/translation-script.js?v=10"></script>
+		    <script>
+    			function forceLang(lang){
+    				if (lang == 'en') $('#tr-flag').attr("src", "/default/materialize/images/flags/US.png");
+    				if (lang == 'es') $('#tr-flag').attr("src", "/default/materialize/images/flags/Mexico.png");
+    				$("[data-translate]").jqTranslate('/default/materialize/js/plugins/translator/translation', {
+			            forceLang: lang
+			        });
+
+			        /* We save language inside a cookie */
+			        $.cookie('app-language', lang);
+			        $.cookie('app-language', lang, { path: '/' });
+    			}
+
+		    </script>
 			{% if locale_language_id != "en" %}
 				{% if locale_iso.language == "pt" and locale_iso.territory == "BR" %}
 					<script src="/boilerplate/js/libs/jquery_validation/localization/messages_{{ locale_iso.language }}_{{ locale_iso.territory }}.js"></script>

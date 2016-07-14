@@ -23,21 +23,21 @@
 			        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
 			        <div class="row">
 			          <div class="input-field col s12 center">
-			            <p class="center login-form-text">Please enter your credentials</p>
+			            <p class="center login-form-text" data-translate="login-title">Please enter your credentials</p>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-social-person-outline prefix"></i>
 			            <input id="email" name="email" type="email" class="validate">
-			            <label for="email" class="center-align">Email</label>
+			            <label for="email" class="center-align" data-translate="login-email">Email</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-action-lock-outline prefix"></i>
 			            <input id="password" name="password" type="password">
-			            <label for="password" class="">Password</label>
+			            <label for="password" class="" data-translate="login-pass">Password</label>
 			          </div>
 			        </div>
 			        <div class="row" style="display:none;">          
@@ -48,12 +48,12 @@
 			        </div>
 			        <div class="row">
 			          <div class="input-field col s12">
-			            <a class="btn waves-effect waves-light col s12" style="cursor:pointer;" onclick="sendForm('form_login')">Login</a>
+			            <a class="btn waves-effect waves-light col s12" style="cursor:pointer;" onclick="sendForm('form_login')" data-translate="login-login">Login</a>
 			          </div>
 			        </div>
 			        <div class="row right">
 			          <div class="input-field col s12">
-			              <p class="margin right-align medium-small"><a href="{{ uri_for("password-reset") }}">Forgot password ?</a></p>
+			              <p class="margin right-align medium-small"><a href="{{ uri_for("password-reset") }}" data-translate="login-forgot">Forgot password ?</a></p>
 			          </div>          
 			        </div>
 			      </form>

@@ -17,7 +17,7 @@
 	<div class="section">
 	    <div class="container" style="margin-top:80px">
 	    	<div class="row">
-		        <h3 class="col s12 m9 offset-m1 grey-text" style="font-weight: 200">Hey! Please share your opinion on a place.</h3>
+		        <h3 class="col s12 m9 offset-m1 grey-text" style="font-weight: 200" data-translate="report-header">Hey! Please share your opinion on a place.</h3>
 	    	</div>
 	        <div class="row">
 	        	 <form class="col s12" id="form_report" action="{{ url|safe }}" enctype="multipart/form-data" method="post">
@@ -31,116 +31,116 @@
 		    	                	<div class="row">
 		    	                		<div class="input-field col s11 offset-s1 m5 offset-m1">
 		                                    <!-- Dropdown Trigger -->
-		                                    <p class="grey-text">I want to share an...</p>
+		                                    <p class="grey-text" data-translate="report-kind">I want to share an...</p>
 		                                    <a data-hover="false" id='kindGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='kindGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">---</a>
 		                                    <!-- Dropdown Structure -->
 		                                    <ul id='kindGroupdd' class='dropdown-content' style="max-height: 250px; font-weight: bolder;">
-		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">opinion</a></li>
-		                                    	<li> <a style="color:#F79A50" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">project</a></li>
-		                                    	<li> <a style="color:#FDC935" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">intervention</a></li>
+		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=('opinion').trim(); return false;" data-translate="report-kind-opinion">opinion</a></li>
+		                                    	<li> <a style="color:#F79A50" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=('project').trim(); return false;" data-translate="report-kind-project">project</a></li>
+		                                    	<li> <a style="color:#FDC935" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=('intervention').trim(); return false;" data-translate="report-kind-intervention">intervention</a></li>
 		                                    </ul>                
 		                                </div>
 		    	                	</div>
 	                                <div class="input-field col s11 offset-s1">
 	                                    <i class="mdi-av-subtitles prefix sm-green-text"></i>
 	                                    <input id="title" name="title" class="materialize-textarea" length="100" type="text">
-	                                    <label for="title">The place is called:</label>
+	                                    <label for="title" data-translate="report-title">The place is called:</label>
 	                                </div>
 	                                <div class="input-field col s11 offset-s1">
 	                                    <i class="mdi-maps-map prefix sm-green-text"></i>
 	                                    <textarea id="description" name="description" class="materialize-textarea" length="500" style="height: 22px;" type="text" ></textarea>
-	                                    <label for="description">Write your opinion about this place. What do you like and do not like? How can it be improved? What's happening here? (Optional)</label>
+	                                    <label for="description" data-translate="report-desc">Write your opinion about this place. What do you like and do not like? How can it be improved? What's happening here? (Optional)</label>
 	                                </div>
 		    	                    <div class="row center">
 		                                <div class="input-field col s11 offset-s1 m5 offset-m1">
 		                                    <!-- Dropdown Trigger -->
-		                                    <p class="grey-text" style="margin-left:55px">I like this place...</p>
+		                                    <p class="grey-text" style="margin-left:55px" data-translate="report-like">I like this place...</p>
 		                                    <a data-hover="false" id='catGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='catGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">---</a>
 		                                    <!-- Dropdown Structure -->
 		                                    <ul id='catGroupdd' class='dropdown-content' style="max-height: 250px; font-weight: bolder;">
-		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(this.innerHTML).trim(); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> Not at all</a></li>
-		                                    	<li> <a style="color:#F79A50" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(this.innerHTML).trim(); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> A little</a></li>
-		                                    	<li> <a style="color:#FDC935" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(this.innerHTML).trim(); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> As any other</a></li>
-		                                    	<li> <a style="color:#3CC6D7" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(this.innerHTML).trim(); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> A lot</a></li>
-		                                    	<li> <a style="color:#608FC4" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(this.innerHTML).trim(); return false;"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> I love it</a></li>
+		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(' Not at all').trim(); return false;" data-translate="report-like-not"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> Not at all</a></li>
+		                                    	<li> <a style="color:#F79A50" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(' A little').trim(); return false;" data-translate="report-like-little"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> A little</a></li>
+		                                    	<li> <a style="color:#FDC935" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(' As any other').trim(); return false;" data-translate="report-like-any"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> As any other</a></li>
+		                                    	<li> <a style="color:#3CC6D7" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(' A lot').trim(); return false;" data-translate="report-like-lot"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> A lot</a></li>
+		                                    	<li> <a style="color:#608FC4" href="#" onclick="document.getElementById('catGroupbtn').innerHTML=this.innerHTML; document.getElementById('catGroup').value=(' I love it').trim(); return false;" data-translate="report-like-love"><i class="mdi-image-brightness-1" style="font-size:15px;"></i> I love it</a></li>
 		                                    </ul>                
 		                                </div>
 		                              
 		                                <div id="subCatdd_container" class="input-field col s10 offset-s1 m5">
 		                                    <!-- Dropdown Trigger -->
-		                                    <p class="grey-text" style="margin-left:55px">It makes me feel:</p>
+		                                    <p class="grey-text" style="margin-left:55px" data-translate="report-feel">It makes me feel:</p>
 		                                    <div class="row">
 			                                    <div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-social"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Social'); return false;"> Social</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-social"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Social'); return false;" data-translate="report-social"> Social</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-free"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Free'); return false;"> Free</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-free"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Free'); return false;" data-translate="report-free"> Free</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-happy"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Happy'); return false;"> Happy</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-happy"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Happy'); return false;" data-translate="report-happy"> Happy</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-relaxed"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Relaxed'); return false;"> Relaxed</a> 
-						                      	</div>
-						                    </div>
-						                    <div class="row">
-						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-joyful"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Joyful'); return false;"> Joyful</a> 
-						                      	</div>
-						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-amazed"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Amazed'); return false;"> Amazed</a> 
-						                      	</div>
-						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-peaceful"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Peaceful'); return false;"> Peaceful</a> 
-						                      	</div>
-						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-excited"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Excited'); return false;"> Excited</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-relaxed"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Relaxed'); return false;" data-translate="report-relaxed"> Relaxed</a> 
 						                      	</div>
 						                    </div>
 						                    <div class="row">
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-afraid"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Afraid'); return false;"> Afraid</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-joyful"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Joyful'); return false;" data-translate="report-joyful"> Joyful</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-nervous"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Nervous'); return false;"> Nervous</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-amazed"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Amazed'); return false;" data-translate="report-amazed"> Amazed</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-stressed"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Stressed'); return false;"> Stressed</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-peaceful"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Peaceful'); return false;" data-translate="report-peaceful"> Peaceful</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-confused"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Confused'); return false;"> Confused</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-excited"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Excited'); return false;" data-translate="report-excited"> Excited</a> 
+						                      	</div>
+						                    </div>
+						                    <div class="row">
+						                      	<div class="col s3 center"> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-afraid"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Afraid'); return false;" data-translate="report-afraid"> Afraid</a> 
+						                      	</div>
+						                      	<div class="col s3 center"> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-nervous"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Nervous'); return false;" data-translate="report-nervous"> Nervous</a> 
+						                      	</div>
+						                      	<div class="col s3 center"> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-stressed"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Stressed'); return false;" data-translate="report-stressed"> Stressed</a> 
+						                      	</div>
+						                      	<div class="col s3 center"> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-confused"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Confused'); return false;" data-translate="report-confused"> Confused</a> 
 						                      	</div>
 						                    </div>
 					                      	<div class="row">
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-anxious"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Anxious'); return false;"> Anxious</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-anxious"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Anxious'); return false;" data-translate="report-anxious"> Anxious</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-bored"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Bored'); return false;"> Bored</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-bored"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Bored'); return false;" data-translate="report-bored"> Bored</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-sporty"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Sporty'); return false;"> Sporty</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-sporty"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Sporty'); return false;" data-translate="report-sporty"> Sporty</a> 
 						                      	</div>
 						                      	<div class="col s3 center"> 
-						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-nothing"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Nothing'); return false;"> Nothing</a> 
+						                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-nothing"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Nothing'); return false;" data-translate="report-nothing"> Nothing</a> 
 						                      	</div>
 						                    </div>
 					                      	<div class="col s3 center"> 
-					                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-other"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Other'); return false;"> Other</a> 
+					                      		<i class="mdi-toggle-check-box sm-green-text col s3" style="display:none;" id="feeling-other"></i><a class="grey-text col s9" href="#" onclick="setQ('feeling','Other'); return false;" data-translate="report-other"> Other</a> 
 					                      	</div>                
 		                                </div>
 		    	                    </div>
 		    	                    <div class="input-field col s11 offset-s1" style="margin-top:20px;">
 					                    <i class="mdi-action-search prefix sm-green-text" onclick="geocode('from')"></i>
 					                    <input id="address_from" name="address_from" type="text" class="validate" value="{{address_from}}" placeholder="Write down the address or click on the map." onkeydown="if (event.keyCode == 13) geocode('from');">
-					                    <label for="address_from" class="active">Location</label>
+					                    <label for="address_from" class="active" data-translate="report-location">Location</label>
 					                    <div id="map" style="width:100%; height: 500px; top: 35px; border-radius: 4px; margin-bottom:60px"></div>
 					                </div>                
 					                <input type="text" id ="address_from_coord" name="address_from_coord" value="{{ address_from_coord}}" hidden>
 	                               
 		                            
 		                            <div class="input-field col s11 offset-s1">
-	                                    <p class="grey-text">Please attach a picture.</p>
+	                                    <p class="grey-text" data-translate="report-picture">Please attach a picture.</p>
 	                                    <div class="file-field input-field">
 	                                        <a class="waves-effect waves-light btn sm-green">
 	                                            <i class="mdi-editor-attach-file"></i>
@@ -155,7 +155,7 @@
 		                            <div class="input-field col s11 offset-s1">
 	                                    <i class="mdi-av-play-circle-fill prefix sm-green-text"></i>
 	                                    <input id="video_url" name="video_url" class="materialize-textarea" length="100" type="text">
-	                                    <label for="video_url">If you have a youtube video please add it here:</label>
+	                                    <label for="video_url" data-translate="report-video">If you have a youtube video please add it here:</label>
 	                                </div>                                            
 		    	                
 		    	                </div>
@@ -167,7 +167,7 @@
 	        </div>
 	        <div class="row">
 	        	<div class="input-field col s11 offset-s1 center">
-	                <button class="waves-effect waves-light sm-green white-text btn-large right" id="submit_report_form" >Submit
+	                <button class="waves-effect waves-light sm-green white-text btn-large right" id="submit_report_form" data-translate="report-report">Submit
 	                    <i class="mdi-content-send right"></i>
 	                </button>	                          
 	            </div>
