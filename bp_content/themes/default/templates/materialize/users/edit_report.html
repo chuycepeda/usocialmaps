@@ -35,9 +35,9 @@
 		                                    <a data-hover="false" id='kindGroupbtn' class='dropdown-button disabled btn sm-green white-text truncate' href='#' data-activates='kindGroupdd' style="min-width: 250px; min-height: 45px; line-height: 45px;">{{report.kind}}</a>
 		                                    <!-- Dropdown Structure -->
 		                                    <ul id='kindGroupdd' class='dropdown-content' style="max-height: 250px; font-weight: bolder;">
-		                                    	<li> <a style="color:#F26E62" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">opinion</a></li>
-		                                    	<li> <a style="color:#F79A50" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">project</a></li>
-		                                    	<li> <a style="color:#FDC935" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=(this.innerHTML).trim(); return false;">intervention</a></li>
+		                                    	<li> <a style="color:#B3DA93" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=('opinion').trim(); return false;">opinion</a></li>
+		                                    	<li> <a style="color:#B3DA93" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=('project').trim(); return false;">proposal</a></li>
+		                                    	<li> <a style="color:#B3DA93" href="#" onclick="document.getElementById('kindGroupbtn').innerHTML=this.innerHTML; document.getElementById('kind').value=('intervention').trim(); return false;">intervention</a></li>
 		                                    </ul>                
 		                                </div>
 		    	                	</div>
@@ -156,7 +156,13 @@
 	                                    <i class="mdi-av-play-circle-fill prefix sm-green-text"></i>
 	                                    <input id="video_url" name="video_url" class="materialize-textarea" length="100" type="text" value="{{report.video_url}}">
 	                                    <label for="video_url">If you have a youtube video please add it here:</label>
-	                                </div>                                            
+	                                </div>  
+
+	                                <div class="input-field col s11 offset-s1">
+	                                    <i class="mdi-image-style prefix sm-green-text"></i>
+	                                    <input id="tags" name="tags" class="materialize-textarea" length="100" type="text" value="{{report.tags}}">
+	                                    <label for="tags" data-translate="report-tags">Finally add some tags for the ease of searching</label>
+	                                </div>                                           
 		    	                
 		    	                </div>
 		        	        </div>

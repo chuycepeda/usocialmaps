@@ -100,6 +100,7 @@ class Report(ndb.Model):
     user_id = ndb.IntegerProperty(required = True, default = -1)                                                                    #: Reporting user ID
     image_url = ndb.StringProperty()                                                                                                #: Report media 
     video_url = ndb.StringProperty()                                                                                                #: Report media 
+    tags = ndb.StringProperty(default = "")                                                                                         #: Report hashtags 
     likeability = ndb.StringProperty()                                                                                              #: Parent category
     feeling  = ndb.StringProperty()                                                                                                 #: Child category
     follows = ndb.IntegerProperty(default = 0)                                                                                      #: Followers as votes/relevance for this report

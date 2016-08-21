@@ -23,9 +23,9 @@
 	"register-privacy": "Privacy policy",
 	"report-header": "Hey! Please share your opinion on a place.",
 	"report-kind": "I want to share an...",
-	"report-kind-opinion": "opinion",
-	"report-kind-project": "project",
-	"report-kind-intervention": "intervention",
+	"report-kind-opinion": "<img src=\"http://usocialmaps.appspot.com/default/materialize/images/markers/lgreen.png\" style=\"height:40px;margin-bottom: -14px;\">opinion",
+	"report-kind-project": "<img src=\"http://usocialmaps.appspot.com/default/materialize/images/markers/idea.png\" style=\"height:40px;margin-bottom: -14px;\">proposal",
+	"report-kind-intervention": "<img src=\"http://usocialmaps.appspot.com/default/materialize/images/markers/intervention.png\" style=\"height:40px;margin-bottom: -14px;\">intervention",
 	"report-title": "The place is called:",
 	"report-desc": "Write your opinion about this place. What do you like and do not like? How can it be improved? What's happening here? (Optional)",
 	"report-like": "I like this place...",
@@ -55,5 +55,6 @@
 	"report-location": "Location",
 	"report-picture": "Please attach a picture",
 	"report-video": "If you have a video please add it here:",
+	"report-tags": "Finally add some tags for the ease of searching",
 	"report-report": "Submit"
 }

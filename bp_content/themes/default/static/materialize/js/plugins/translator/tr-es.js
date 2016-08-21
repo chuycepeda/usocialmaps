@@ -23,9 +23,9 @@
 	"register-privacy": "Aviso de privacidad",
 	"report-header": "Exige tu derecho a la ciudad.",
 	"report-kind": "Me gustaría compartir...",
-	"report-kind-opinion": "opinión",
-	"report-kind-project": "proyecto",
-	"report-kind-intervention": "desarrollo",
+	"report-kind-opinion": "<img src=\"http://usocialmaps.appspot.com/default/materialize/images/markers/lgreen.png\" style=\"height:40px;margin-bottom: -14px;\">opinión",
+	"report-kind-project": "<img src=\"http://usocialmaps.appspot.com/default/materialize/images/markers/idea.png\" style=\"height:40px;margin-bottom: -14px;\">propuesta",
+	"report-kind-intervention": "<img src=\"http://usocialmaps.appspot.com/default/materialize/images/markers/intervention.png\" style=\"height:40px;margin-bottom: -14px;\">desarrollo",
 	"report-title": "El lugar se llama:",
 	"report-desc": "Escribe tu opinión acerca de este lugar ¿Qué te gusta y qué no te gusta? ¿Cómo puede mejorarse? ¿Qué esta pasando aqui? (Opcional)",
 	"report-like": "¿Te gusta este lugar?",
@@ -55,5 +55,6 @@
 	"report-location": "Ubicación",
 	"report-picture": "Por favor agrega una foto",
 	"report-video": "Si tienes un link a un video, agrégalo aquí",
+	"report-tags": "Por último puedes agregar hashtags para facilitar su búsqueda",
 	"report-report": "Reportar"
 }

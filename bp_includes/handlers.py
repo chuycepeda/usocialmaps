@@ -879,6 +879,7 @@ class MaterializeNewReportHandler(BaseHandler):
         title = self.request.get('title')
         video_url = self.request.get('video_url')
         kind = self.request.get('kind')
+        tags = self.request.get('tags').replace('#','') if self.request.get('tags') else ''
         
         try:
             user_report = models.Report()
@@ -891,6 +892,7 @@ class MaterializeNewReportHandler(BaseHandler):
             user_report.description = description
             user_report.likeability = catGroup
             user_report.feeling  = subCat
+            user_report.tags  = tags
             user_report.put()
             
             #PUSH TO CARTODB
@@ -900,7 +902,7 @@ class MaterializeNewReportHandler(BaseHandler):
             cartodb_domain = self.app.config.get('cartodb_user')
             cartodb_table = self.app.config.get('cartodb_reports_table')
             #INSERT
-            unquoted_url = ("https://%s.cartodb.com/api/v2/sql?q=INSERT INTO %s (the_geom, title, description, address, image_url, likeability, feeling, follows, uuid, created, kind, video_url) VALUES (ST_GeomFromText('POINT(%s %s)', 4326),'%s','%s','%s','%s','%s','%s',%s,'%s','%s','%s','%s')&api_key=%s" % (cartodb_domain, cartodb_table, user_report.address_from_coord.lon, user_report.address_from_coord.lat, user_report.title,user_report.description,user_report.address_from,user_report.image_url,user_report.likeability,user_report.feeling,user_report.follows,user_report.key.id(), user_report.created.strftime("%Y-%m-%d"),user_report.kind,user_report.video_url,api_key)).encode('utf8')
+            unquoted_url = ("https://%s.cartodb.com/api/v2/sql?q=INSERT INTO %s (the_geom, title, description, address, image_url, likeability, feeling, follows, uuid, created, kind, video_url, tags) VALUES (ST_GeomFromText('POINT(%s %s)', 4326),'%s','%s','%s','%s','%s','%s',%s,'%s','%s','%s','%s','%s')&api_key=%s" % (cartodb_domain, cartodb_table, user_report.address_from_coord.lon, user_report.address_from_coord.lat, user_report.title,user_report.description,user_report.address_from,user_report.image_url,user_report.likeability,user_report.feeling,user_report.follows,user_report.key.id(), user_report.created.strftime("%Y-%m-%d"),user_report.kind,user_report.video_url,user_report.tags,api_key)).encode('utf8')
             url = urllib.quote(unquoted_url, safe='~@$&()*!+=:;,.?/\'')
             t = urlfetch.fetch(url)
             logging.info("t: %s" % t.content)
@@ -1205,6 +1207,7 @@ class MaterializeReportsEditRequestHandler(BaseHandler):
         title = self.request.get('title')
         video_url = self.request.get('video_url')
         kind = self.request.get('kind')
+        tags = self.request.get('tags').replace('#','') if self.request.get('tags') else ''
         
         try:
             user_report = models.Report.get_by_id(long(report_id))
@@ -1217,6 +1220,7 @@ class MaterializeReportsEditRequestHandler(BaseHandler):
             user_report.description = description
             user_report.likeability = catGroup
             user_report.feeling  = subCat
+            user_report.tags  = tags
             user_report.put()
             
             #PUSH UPDATED STATUS TO CARTODB
@@ -1227,7 +1231,7 @@ class MaterializeReportsEditRequestHandler(BaseHandler):
             cartodb_table = self.app.config.get('cartodb_reports_table')
             if user_report.cdb_id != -1:
                 #UPDATE
-                unquoted_url = ("https://%s.cartodb.com/api/v2/sql?q=UPDATE %s SET the_geom = ST_GeomFromText('POINT(%s %s)', 4326), title = '%s', description = '%s', address = '%s', image_url = '%s', likeability = '%s', feeling = '%s', follows = '%s', uuid = '%s', created = '%s', kind = '%s', video_url = '%s' WHERE cartodb_id = %s &api_key=%s" % (cartodb_domain, cartodb_table, user_report.address_from_coord.lon, user_report.address_from_coord.lat, user_report.title,user_report.description,user_report.address_from,user_report.image_url,user_report.likeability,user_report.feeling,user_report.follows,user_report.key.id(), user_report.created.strftime("%Y-%m-%d"),user_report.kind,user_report.video_url,user_report.cdb_id,api_key)).encode('utf8')
+                unquoted_url = ("https://%s.cartodb.com/api/v2/sql?q=UPDATE %s SET the_geom = ST_GeomFromText('POINT(%s %s)', 4326), title = '%s', description = '%s', address = '%s', image_url = '%s', likeability = '%s', feeling = '%s', follows = '%s', uuid = '%s', created = '%s', kind = '%s', video_url = '%s', tags = '%s' WHERE cartodb_id = %s &api_key=%s" % (cartodb_domain, cartodb_table, user_report.address_from_coord.lon, user_report.address_from_coord.lat, user_report.title,user_report.description,user_report.address_from,user_report.image_url,user_report.likeability,user_report.feeling,user_report.follows,user_report.key.id(), user_report.created.strftime("%Y-%m-%d"),user_report.kind,user_report.video_url,user_report.tags,user_report.cdb_id,api_key)).encode('utf8')
                 url = urllib.quote(unquoted_url, safe='~@$&()*!+=:;,.?/\'')
                 try:
                     t = urlfetch.fetch(url)
