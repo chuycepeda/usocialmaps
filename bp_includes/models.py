@@ -55,6 +55,7 @@ class User(User):
     rewards = ndb.StructuredProperty(Rewards, repeated = True)                                     #: Rewards allocation property, includes referral email tracking.    
     role = ndb.StringProperty(choices = ['NA','Member','Admin'], default = 'Admin')                #: Role in account
     picture = ndb.BlobProperty()                                                                   #: User profile picture as an element in datastore of type blob
+    google_ID = ndb.StringProperty()                                                               #: User google ID for profile purposes
 	
     @classmethod
     def get_by_email(cls, email):
@@ -83,9 +84,21 @@ class User(User):
 
     def get_image_url(self):
         if self.picture:
-            return "http://usocialmaps.appspot.com/media/serve/profile/%s/" % self._key.id()
+            return "/media/serve/profile/%s/" % self._key.id()
+        elif self.google_ID is not None:
+            social = UserGOOG.query(UserGOOG.user_id == int(self._key.id())).get()
+            if social is not None:
+                return social.picture if social.picture is not None else -1
         else:
             return -1
+
+class UserGOOG(ndb.Model):
+    user_id = ndb.IntegerProperty(required = True)
+    first_name = ndb.StringProperty()
+    last_name = ndb.StringProperty()
+    gender = ndb.StringProperty()
+    picture = ndb.StringProperty()
+    cover = ndb.StringProperty()
 #--------------------------------------- ENDOF   U S E R    M O D E L -----------------------------------------------------          
 
 class Report(ndb.Model):

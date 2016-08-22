@@ -174,6 +174,10 @@ class BaseHandler(webapp2.RequestHandler):
         return None
 
     @webapp2.cached_property
+    def google_clientID(self):
+        return self.app.config.get('google_clientID')
+
+    @webapp2.cached_property
     def path_for_language(self):
         """
         Get the current path + query_string without language parameter (hl=something)
@@ -316,7 +320,8 @@ class BaseHandler(webapp2.RequestHandler):
             'locales': self.locales,
             'enable_federated_login': self.app.config.get('enable_federated_login'),
             'base_layout': self.get_base_layout,
-            'landing_layout': self.get_landing_layout
+            'landing_layout': self.get_landing_layout,
+            'google_clientID': self.google_clientID
         })
         kwargs.update(self.auth_config)
         if hasattr(self, 'form'):

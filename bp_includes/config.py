@@ -101,6 +101,7 @@ config = {
     # Use a complete Google Analytics code, no just the Tracking ID
     # In config/boilerplate.py there is an example to fill out this value
     'google_analytics_code': '',
+    'google_clientID': '492774814648-5ptpe872i3hen133c0jmfr889jgbr715.apps.googleusercontent.com', #get it new from https://console.cloud.google.com/apis/credentials?project=<APP_ID>
 
     # add status codes and templates used to catch and display errors
     # if a status code is not listed here it will use the default app engine

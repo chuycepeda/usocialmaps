@@ -1294,7 +1294,27 @@ class MaterializeReportCommentsAddHandler(BaseHandler):
                 log_info.user_email = user_info.email.lower()
                 log_info.report_id = int(report_id)
                 log_info.contents = comments
-                log_info.put()                
+                log_info.put()  
+
+                # load email's template to notify author
+                template_val = {
+                    "app_name": self.app.config.get('app_name'),
+                    "username": report_info.get_user_name(),
+                    "confirmation_url": self.uri_for("landing", _full=True) + '?cdb_id=' + str(report_info.cdb_id),
+                    "support_url": self.uri_for("contact", _full=True),
+                    "twitter_url": self.app.config.get('twitter_url'),
+                    "facebook_url": self.app.config.get('facebook_url'),
+                    "faq_url": self.uri_for("faq", _full=True)
+                }
+                body_path = "emails/comment_notification.txt"
+                body = self.jinja2.render_template(body_path, **template_val)
+
+                email_url = self.uri_for('taskqueue-send-email')
+                taskqueue.add(url=email_url, params={
+                    'to': str(report_info.get_user_email()),
+                    'subject': 'Someone said something to you at Social Maps.',
+                    'body': body,
+                })              
 
             reportDict['status'] = 'success'
 
@@ -1393,6 +1413,65 @@ class MaterializeSettingsProfileRequestHandler(BaseHandler):
     def form(self):
         f = forms.SettingsProfileForm(self)
         return f
+
+class MaterializeSettingsSocialRequestHandler(BaseHandler):
+    @user_required
+    def post(self):
+        _user_id = int(self.request.get('user_id'))
+
+        if not self.user_id or int(self.user_id) != _user_id:
+            self.abort(403)
+
+        reportDict = {}
+
+        kind = self.request.get('kind')
+        first_name = self.request.get('first_name')
+        last_name = self.request.get('last_name')
+        gender = self.request.get('gender')
+        picture = self.request.get('picture')
+        cover = self.request.get('cover')
+        social_id = self.request.get('id')
+
+        try:
+            if kind == 'google':
+                social = models.UserGOOG.query(models.UserGOOG.user_id == _user_id).get()
+                if social is None:
+                    social = models.UserGOOG()
+                if social_id != 'none':
+                    user_info = self.user_model.get_by_id(long(self.user_id))
+                    user_info.google_ID = str(social_id)
+                    user_info.put()
+
+            if kind == 'facebook':
+                social = models.UserFB.query(models.UserFB.user_id == _user_id).get()
+                if social is None:
+                    social = models.UserFB()
+                if social_id != 'none':
+                    user_info = self.user_model.get_by_id(long(self.user_id))
+                    user_info.facebook_ID = str(social_id)
+                    user_info.put()
+                age_range = self.request.get('age_range')
+                social.age_range = int(age_range) if age_range != 'none' else social.age_range
+
+            social.user_id = _user_id
+
+            social.first_name = first_name if first_name != 'none' else social.first_name
+            social.last_name = last_name if last_name != 'none' else social.last_name
+            social.gender = gender if gender != 'none' else social.gender
+            social.picture = picture if picture != 'none' else social.picture
+            social.cover = cover if cover != 'none' else social.cover
+            social.put()
+            reportDict['status'] = 'success'
+            reportDict['contents'] = 'user social profile for kind %s has been saved' % kind
+
+        except Exception as e:
+            reportDict['status'] = 'error'
+            reportDict['contents'] = '%s' % e
+            pass
+
+        self.response.headers.add_header("Access-Control-Allow-Origin", "*")
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(json.dumps(reportDict))
 
 class MaterializeSettingsAccountRequestHandler(BaseHandler):
     @user_required

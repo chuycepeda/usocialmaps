@@ -27,7 +27,7 @@ function switchLanguage() {
     $('#switch-lang').on('change', function(e) {
         e.preventDefault();
         language = $(this).val();
-        $("[data-translate]").jqTranslate('/default/materialize/js/plugins/translator/tr', {
+        $("[data-translate]").jqTranslate('/default/materialize/js/plugins/translator/translation', {
             forceLang: language
         });
 
