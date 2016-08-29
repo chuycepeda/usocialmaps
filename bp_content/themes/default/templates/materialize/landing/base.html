@@ -150,6 +150,7 @@
 		{% endblock %}
 
 		{% block page_components %}
+    		<link href="/boilerplate/webcomponents/bower_components/google-signin/google-signin.html" rel="import" >
 		{% endblock %}
 
 
@@ -500,18 +501,24 @@
 			            <p class="center login-form-text" data-translate="register-title">Join the community and become a social mapper!</p>
 			          </div>
 			        </div>
+			        <div class="row center" style="margin-bottom: 14px; margin-top: 14px;">
+                        <google-signin  class="center" clientId="{{google_clientID}}" scopes="https://www.googleapis.com/auth/plus.me email" labelSignin="Connect profile" labelSignout="Disconnect"width="wide" height="tall" style="max-width:290px;"></google-signin>
+                    </div> 
+                    <div class="row">
+                    	<hr class="col s6 offset-s3 m4 offset-m4">
+                    </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-social-person-outline prefix"></i>
 			            <input id="register_name" name="name" type="text">
-			            <label for="name" class="center-align" data-translate="register-name">Name</label>
+			            <label id="label_name" for="name" class="center-align" data-translate="register-name">Name</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
 			          <div class="input-field col s12">
 			            <i class="mdi-communication-email prefix"></i>
 			            <input id="register_email" name="email" type="email" class="validate">
-			            <label for="email" class="center-align" data-translate="register-email">Email</label>
+			            <label id="label_email" for="email" class="center-align" data-translate="register-email">Email</label>
 			          </div>
 			        </div>
 			        <div class="row margin">
@@ -901,7 +908,7 @@
 
 			<script src="/{{theme}}/materialize/js/plugins/jquery/jquery.cookies.min.js"></script>
 		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins/translator/jqueryTranslator.min.js"></script>
-		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins/translator/translation-script.js?v=9999"></script>
+		    <script type="text/javascript" src="/{{theme}}/materialize/js/plugins/translator/translation-script.js?v=99999"></script>
 		    <script>
 		    	var cookies = document.cookie, lang = 'en';
 	    		var cookieArr = document.cookie.split(';');
@@ -1890,6 +1897,31 @@
 			        });
 					{% endif %}
 				</script>
+				{% if google_clientID != '' %}
+			        <!-- DOC: https://elements.polymer-project.org/elements/google-signin -->
+			        <script type="text/javascript">
+			              var first_time = true, go_accessToken = '';
+			              document.querySelector('google-signin').addEventListener('google-signin-success', function(e) {
+			                console.log(e.type, e.detail.result, e.detail.gapi);
+			                go_accessToken = e.detail.result.access_token;
+			                if (first_time){                    
+			                    url = 'https://content.googleapis.com/plus/v1/people/me?access_token='+go_accessToken;
+			                    $.get(url,
+			                        function(data){
+			                            console.log('go_user', data);
+			                            document.getElementById('register_name').value = data.displayName;
+			                            document.getElementById('register_email').value = data.emails[0].value;
+			                            document.getElementById('register_password').value = '';
+			                            $('#label_name').addClass('active');
+			                            $('#label_email').addClass('active');
+			    						Materialize.toast('<span class="toast-success">¡Estás listo!, ahora solo escribe una contraseña!.</span>',4500);
+			                        }
+			                    );
+			                }
+			                first_time = !first_time;
+			              });
+			        </script>
+			    {% endif %}
 
 				<script type="infowindow/html" id="infowindow_public_reports">
                     {% raw %}
