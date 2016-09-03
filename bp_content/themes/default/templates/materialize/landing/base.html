@@ -1097,7 +1097,7 @@
 								    _bounds.extend(new google.maps.LatLng(bounds[0][0], bounds[0][1]));
 								    _bounds.extend(new google.maps.LatLng(bounds[1][0], bounds[1][1]));
 								    map.fitBounds(_bounds);
-								    map.setZoom(10);
+								    setTimeout(function(){map.setZoom(map.getZoom()-4);}, 600);
 							    });
 
 
