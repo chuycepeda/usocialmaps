@@ -22,6 +22,7 @@ config = {
 
     # application name
     'app_name': 'Social Maps',
+    'app_id': 'usocialmaps',
     'twitter_url': '',
     'facebook_url': '',
     'meta_tags_code': """
